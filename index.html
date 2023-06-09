@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="navbar">
+        <h1>Travel Planner</h1>
+    </div>
+
+    <div class = "input">
+        <input type="text" class="userInput" id="userInput1">
+        <input type="submit" value="Submit" class="button">
+    </div>
+
+    <div class="display" style="border:1px solid black">
+        <h1 class=></h1>
+        <p class = ></p>
+        <p class=></p>
+    </div>
+    
+    <!-- City Tabs -->
+    <div class="city-tabs" >
+        
+            <button  href="#">Panama</button>
+            <button  href="#">Hong Kong</button>
+            <button  href="#">London</button>
+            <button  href="#">New York</button>
+            <button  href="#">Syndey</button>
+    </div>
+    
+    
+    <div class="display" style="border:1px solid black">
+
+        <h2>Current Weather</h2>
+        <p class = "name"></p>
+        <p class = "temp" >Temperature: XX°C</p>
+        <p class = "wind">Wind: XX km/h</p>
+        <p class = "humidity">Humidity: XX%</p>
+    </div>
+    
+    <!-- 5 Day Forecast Section -->
+    <div class="forecast" style="border:1px solid black">
+        <h2>5 Day Forecast</h2>
+        <div class="forecast-day">
+            <!-- Day 1 forecast details -->
+        </div>
+        <div class="forecast-day">
+            <!-- Day 2 forecast details -->
+        </div>
+        <div class="forecast-day">
+            <!-- Day 3 forecast details -->
+        </div>
+        <div class="forecast-day">
+            <!-- Day 4 forecast details -->
+        </div>
+        <div class="forecast-day">
+            <!-- Day 5 forecast details -->
+        </div>
+    </div>
+
+        <div class = currenyExchange>
+            <div>
+                <h2 class=>Curreny Exchange: </h1>
+                    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 10px; padding: 10px">
+                
+                    <p class = >USD</p>
+                        <input type="text" class="userInput" id="userInput1"> 
+                            <p>  will be worth </p>
+                    
+                                <input type="text" class="userInput" id="userInput1">
+                                    <input type="submit" value="Submit" class="button"> 
+                    
+                    
+                    </div>
+            </div>
+        </div>
+
+    <div class = "logic-output">
+<!-- Print end result to page -->
+<!-- currently empty, content will be printed on screen, divs will be hidden or shown using AND/OR logic -->
+        <h1>To Travel, or not to Travel, 'tis the Question!</h1>
+        <div class="display travel" style="border:1px solid black">
+            <div class="card">
+                <div class="container">
+                  <h4><b>Travel!</b></h4>
+                  <p>Vacay!</p>
+                </div>
+              </div>
+              </div>
+
+              <div class="display thing-about-it" style="border:1px solid black">
+                <div class="card">
+                    <div class="container">
+                      <h4><b>Might want to think about that one!</b></h4>
+                      <p>Bummer, dude.</p>
+                    </div>
+                  </div>
+                  </div>         
+        </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
