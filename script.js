@@ -1,10 +1,38 @@
 var apiKey = "c97179c78467aee482929400eb659179";
 function getCityInfo(cityName) {
         // uses geocode api from openweather to pull lat, lon - which will be passed into two other functions/api calls to get current weather and forecast
+        var coordsUrl="https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=" + apiKey;
+        fetch(coordsUrl)
+        .then(function(response) {
+                return response.json();
+        })
+        .then(function(cityInfo) {
+                console.log(cityInfo)
+                var lat = cityInfo[0].lat;
+                var lon = cityInfo[0].lon;
+                var countryCode = cityInfo[0].country;
+                getCurrentWeather(lat, lon);
+                getForecast(lat, lon)
+                getCurrencyCode(countryCode)
+        })
         // will call getCurrentWeather, getForecast, and getCurrencyCode functions
         // will pass 'country' variable to getCurrencyCode()
 }
 function getCurrencyCode(countryCode) {
+        var countryUrl="https://restcountries.com/v3.1/alpha/" + countryCode;
+        fetch(countryUrl)
+        .then(function (response) {
+                return response.json();
+        })
+        .then(function (countryInfo) {
+                console.log(countryInfo);
+                console.log(code[0].currencies)
+                var currencyCodeString = JSON.stringify(code[0].currencies);
+                console.log(currencyCodeString);
+                var currencyCode = currencyCodeString.substring(2,5);
+                console.log(currencyCode);
+                getExchangeRate(currencyCode);
+        })
         // api call to restcountries.com to get currency code to be used in getExchangeRate function
         // will call getExchangeRate function, passes currency code
 }
@@ -25,10 +53,12 @@ function getForecast(lat, lon) {
 }
 
 // event listeners to call api functions
-$('#userInput1').on('submit', function(event) {
+$('#submit-button').on('click', function(event) {
         event.preventDefault()
         // define city var based on user input
+        var cityName = $('#userInput1').val();
         // call getCityInfo, passing city var
+        getCityInfo(cityName);
 })
 
 $('.city-tabs').on('click', function(event) {
