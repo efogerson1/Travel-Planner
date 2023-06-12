@@ -27,8 +27,8 @@ function getCurrencyCode(countryCode) {
         })
         .then(function (countryInfo) {
                 console.log(countryInfo);
-                console.log(code[0].currencies)
-                var currencyCodeString = JSON.stringify(code[0].currencies);
+                console.log(countryInfo[0].currencies)
+                var currencyCodeString = JSON.stringify(countryInfo[0].currencies);
                 console.log(currencyCodeString);
                 var currencyCode = currencyCodeString.substring(2,5);
                 console.log(currencyCode);
@@ -36,6 +36,7 @@ function getCurrencyCode(countryCode) {
                 getExchangeRate(currencyCode);
         })
 }
+
 function getExchangeRate(currencyCode) {
         var exchangeApiKey = "601f788cd0034538276991d8";
         var exchangeRateUrl = "https://v6.exchangerate-api.com/v6/" + exchangeApiKey + "/pair/USD/" + currencyCode;
@@ -47,17 +48,34 @@ function getExchangeRate(currencyCode) {
         .then (function (rate) {
                 console.log(rate);
                 console.log(rate.conversion_rate);
+                // value is how much $1(USD) is in selected currency
         })
-        // **PRINT TO PAGE** exchange rate for USD compared to given country currency
+        // **PRINT TO PAGE** exchange rate for $1USD compared to given country currency
 }
+
 function getCurrentWeather(lat, lon) {
         // api call to get chosen city's current weather. lat & lon variables will be passed from getCityInfo
-
+        var urlCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + apiKey;
+        fetch(urlCurrentWeather)
+        .then(function (response) {
+                return response.json();
+        })
+        .then(function (data) {
+                console.log(data);
+        })
         // **PRINT TO PAGE** city name, current date, current weather stats
 }
-function getForecast(lat, lon) {
-        // api call to get 5 day forecast for chosen city
 
+function getForecast(lat, lon) {
+        // api call to get 5 day forecast for chosen city (in 3 hr increments)
+        var urlForecast = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + apiKey;
+        fetch(urlForecast)
+        .then (function (response) {
+                return response.json();
+        })
+        .then(function (forecast) {
+                console.log(forecast)
+        })
         // **PRINT TO PAGE** city name, forecasted dates, forecasted weather stats
 }
 
@@ -73,7 +91,9 @@ $('#submit-button').on('click', function(event) {
 $('.city-tabs').on('click', function(event) {
         event.preventDefault()
         // define city var based on button text
+        var cityName = $(event.target).text()
         // call getCityInfo, passing city var
+        getCityInfo(cityName);
 })
 
 // Order of operation:
