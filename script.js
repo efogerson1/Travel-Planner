@@ -159,9 +159,19 @@ function getExchangeRate(currencyCode) {
         })
         .then (function (rate) {
                 console.log(rate);
-                console.log(rate.conversion_rate);
+                var conversionRate = rate.conversion_rate;
+                console.log(conversionRate);
                 // value is how much $1(USD) is in selected currency
         // **PRINT TO PAGE** conversion rate for $1USD compared to given country currency ('rate' and 'rate.conversion_rate' specifically console logged above to print)
+
+                // event listener to multiply the conversion rate by the user input USD amount (if user says they have 20 bucks, will return how much that is in the selected currency) 
+                // **OPTIONAL**, but I saw the input there in the html so went ahead and added this functionality
+                $('#math-submit').on('click', function(e) {
+                        e.preventDefault();
+                        var usdUserAmount = $('#userInput2').val();
+                        var math = usdUserAmount * conversionRate;
+                        console.log(math.toFixed(3));
+                })
         })
 }
 
