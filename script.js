@@ -160,7 +160,9 @@ function getExchangeRate(currencyCode) {
         .then (function (rate) {
                 console.log(rate);
                 var conversionRate = rate.conversion_rate;
+                var targetCode = rate.target_code;
                 console.log(conversionRate);
+                console.log(targetCode);
                 // value is how much $1(USD) is in selected currency
         // **PRINT TO PAGE** conversion rate for $1USD compared to given country currency ('rate' and 'rate.conversion_rate' specifically console logged above to print)
 
@@ -171,6 +173,8 @@ function getExchangeRate(currencyCode) {
                         var usdUserAmount = $('#userInput2').val();
                         var math = usdUserAmount * conversionRate;
                         console.log(math.toFixed(3));
+                        // **PRINT TO PAGE** in the 'will be worth' <p> tag can print this value that is console logged, with the 'targetCode' variable above --
+                        // ex for LONDON: {user input - $20USD} will be worth 15.902{GBP - (targetCode)} 
                 })
         })
 }
