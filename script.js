@@ -1,4 +1,116 @@
 var apiKey = "c97179c78467aee482929400eb659179";
+
+// autofill widget for search bar of 100ish most populated global cities
+// drop down list will need to be styled - can add .ui-autocomplete .ui-menu-item to css to style
+$(function () {
+        var globalCities = [
+                "Tokyo",
+                "Delhi",
+                "Shanghai",
+                "Dhaka",
+                "Sao Paulo",
+                "Mexico City",
+                "Cairo",
+                "Beijing",
+                "Mumbai",
+                "Osaka",
+                "Chongqing",
+                "Karachi",
+                "Kinshasa",
+                "Lagos",
+                "Istanbul",
+                "Buenos Aires",
+                "Kolkata",
+                "Manila",
+                "Guangzhou",
+                "Tianjin",
+                "Lahore",
+                "Rio de Janeiro",
+                "Bangalore",
+                "Shenzhen",
+                "Moscow",
+                "Chennai",
+                "Bogota",
+                "Jakarta",
+                "Paris",
+                "Lima",
+                "Bangkok",
+                "Hyderabad",
+                "Seoul",
+                "Nanjing",
+                "Chengdu",
+                "London",
+                "Nagoya",
+                "Tehran",
+                "Ho Chi Minh City",
+                "Luanda",
+                "Xi-an Shaanxi",
+                "Wuhan",
+                "Ahmedabad",
+                "Kuala Lumpur",
+                "Hangzhou",
+                "Suzhou",
+                "Surat",
+                "Dar es Salaam",
+                "Baghdad",
+                "Hong Kong",
+                "New York",
+                "Riyadh",
+                "Shenyang",
+                "Foshan",
+                "Dongguan",
+                "Pune",
+                "Santiago",
+                "Haerbin",
+                "Madrid",
+                "Toronto",
+                "Khartoum",
+                "Belo Horizonte",
+                "Johannesburg",
+                "Singapore",
+                "Dalian",
+                "Qingdao",
+                "Zhengzhou",
+                "Ji-nan Shandong",
+                "Barcelona",
+                "Abidjan",
+                "Yangon",
+                "Alexandria",
+                "Saint Petersburg",
+                "Fukuoka",
+                "Addis Ababa",
+                "Guadalajara",
+                "Ankara",
+                "Chittagong",
+                "Nairobi",
+                "Hanoi",
+                "Melbourne",
+                "Sydney",
+                "Monterrey",
+                "Changsha",
+                "Cape Town",
+                "Brasilia",
+                "Urumqi",
+                "Jiddah",
+                "Kunming",
+                "Changchun",
+                "Hefei",
+                "Kabul",
+                "Shantou",
+                "Ningbo",
+                "Yaounde",
+                "Xinbei",
+                "Tel Aviv",
+                "Shijiazhuang",
+                "Kano",
+                "Rome",
+                "Montreal",
+        ];
+        $('#userInput1').autocomplete({
+          source: globalCities,
+        });
+      });
+
 function getCityInfo(cityName) {
         // uses geocode api from openweather to pull lat, lon - which will be passed into two other functions/api calls to get current weather and forecast
         var coordsUrl="https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=" + apiKey;
@@ -49,8 +161,8 @@ function getExchangeRate(currencyCode) {
                 console.log(rate);
                 console.log(rate.conversion_rate);
                 // value is how much $1(USD) is in selected currency
-        })
         // **PRINT TO PAGE** exchange rate for $1USD compared to given country currency
+        })
 }
 
 function getCurrentWeather(lat, lon) {
@@ -62,8 +174,8 @@ function getCurrentWeather(lat, lon) {
         })
         .then(function (data) {
                 console.log(data);
-        })
         // **PRINT TO PAGE** city name, current date, current weather stats
+        })
 }
 
 function getForecast(lat, lon) {
@@ -75,8 +187,9 @@ function getForecast(lat, lon) {
         })
         .then(function (forecast) {
                 console.log(forecast)
-        })
         // **PRINT TO PAGE** city name, forecasted dates, forecasted weather stats
+        })
+
 }
 
 // event listeners to call api functions
