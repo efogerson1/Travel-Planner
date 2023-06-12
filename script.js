@@ -11,14 +11,15 @@ function getCityInfo(cityName) {
                 var lat = cityInfo[0].lat;
                 var lon = cityInfo[0].lon;
                 var countryCode = cityInfo[0].country;
+                // calls getCurrentWeather, getForecast, and getCurrencyCode functions; passes relevant values
                 getCurrentWeather(lat, lon);
                 getForecast(lat, lon)
                 getCurrencyCode(countryCode)
         })
-        // will call getCurrentWeather, getForecast, and getCurrencyCode functions
-        // will pass 'country' variable to getCurrencyCode()
 }
+
 function getCurrencyCode(countryCode) {
+        // api call to restcountries.com to get currency code to be used in getExchangeRate function
         var countryUrl="https://restcountries.com/v3.1/alpha/" + countryCode;
         fetch(countryUrl)
         .then(function (response) {
@@ -31,14 +32,22 @@ function getCurrencyCode(countryCode) {
                 console.log(currencyCodeString);
                 var currencyCode = currencyCodeString.substring(2,5);
                 console.log(currencyCode);
+                // calls getExchangeRate function, passes currency code
                 getExchangeRate(currencyCode);
         })
-        // api call to restcountries.com to get currency code to be used in getExchangeRate function
-        // will call getExchangeRate function, passes currency code
 }
 function getExchangeRate(currencyCode) {
-        // api call to exchangerateapi.com to get exchange rate
-
+        var exchangeApiKey = "601f788cd0034538276991d8";
+        var exchangeRateUrl = "https://v6.exchangerate-api.com/v6/" + exchangeApiKey + "/pair/USD/" + currencyCode;
+        // api call to exchangerateapi.com to get exchange rate to USD
+        fetch(exchangeRateUrl)
+        .then (function (response) {
+                return response.json()
+        })
+        .then (function (rate) {
+                console.log(rate);
+                console.log(rate.conversion_rate);
+        })
         // **PRINT TO PAGE** exchange rate for USD compared to given country currency
 }
 function getCurrentWeather(lat, lon) {
