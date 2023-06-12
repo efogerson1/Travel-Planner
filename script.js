@@ -161,7 +161,7 @@ function getExchangeRate(currencyCode) {
                 console.log(rate);
                 console.log(rate.conversion_rate);
                 // value is how much $1(USD) is in selected currency
-        // **PRINT TO PAGE** exchange rate for $1USD compared to given country currency
+        // **PRINT TO PAGE** conversion rate for $1USD compared to given country currency ('rate' and 'rate.conversion_rate' specifically console logged above to print)
         })
 }
 
@@ -174,7 +174,7 @@ function getCurrentWeather(lat, lon) {
         })
         .then(function (data) {
                 console.log(data);
-        // **PRINT TO PAGE** city name, current date, current weather stats
+        // **PRINT TO PAGE** city name, current date, current weather stats ('data' console logged above to view data to print)
         })
 }
 
@@ -187,7 +187,7 @@ function getForecast(lat, lon) {
         })
         .then(function (forecast) {
                 console.log(forecast)
-        // **PRINT TO PAGE** city name, forecasted dates, forecasted weather stats
+        // **PRINT TO PAGE** city name, forecasted dates, forecasted weather stats ('forecast' console logged above to view data to print)
         })
 
 }
