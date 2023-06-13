@@ -116,7 +116,7 @@ function getCityInfo(cityName) {
         var coordsUrl="https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=" + apiKey;
         fetch(coordsUrl)
         .then(function(response) {
-                // if the input for city name is null, the geocode api call will throw an error and alert the user to input a city name
+                // if the input for city name is null, the geocode api call will throw an error and show a hidden modal to the user explaining what went wrong and to please enter a city name
                 if (response.status !== 200) {
                 $('#modal-empty').show();
                 return;
@@ -124,7 +124,7 @@ function getCityInfo(cityName) {
                 return response.json();
         })
         .then(function(cityInfo) {
-                 // if user inputs a city that returns 0 results (the api is not able to pull in a city by that name; misspelled, etc), the browser will alert the user to input a valid city
+                 // if user inputs a city that returns 0 results (the api is not able to pull in a city by that name; misspelled, etc), a modal will appear for the user explaining what went wrong and to please check their spelling
                 if (cityInfo.length === 0) {
                 $('#modal-invalid').show();
                 return;
@@ -139,6 +139,7 @@ function getCityInfo(cityName) {
                 getCurrencyCode(countryCode)
         })
 }
+        // hides the modals if the user clicks the close button
         $('.close').on('click', function() {
                 if ($('#modal-empty:visible')) {
                         $('#modal-empty').hide();
@@ -147,6 +148,7 @@ function getCityInfo(cityName) {
                         $('#modal-invalid').hide();
                 }
         })
+
 function getCurrencyCode(countryCode) {
         // api call to restcountries.com to get currency code to be used in getExchangeRate function
         var countryUrl="https://restcountries.com/v3.1/alpha/" + countryCode;

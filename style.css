@@ -1,3 +1,4 @@
+/* basic styling for modals hidden in html that pop up if errors - not final styling, just needed the modal to be able to pop up and be legible */
 #modal-empty {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
