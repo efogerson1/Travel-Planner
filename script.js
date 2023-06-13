@@ -116,9 +116,19 @@ function getCityInfo(cityName) {
         var coordsUrl="https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=" + apiKey;
         fetch(coordsUrl)
         .then(function(response) {
+                // if the input for city name is null, the geocode api call will throw an error and alert the user to input a city name
+                if (response.status !== 200) {
+                $('#modal-empty').show();
+                return;
+                }
                 return response.json();
         })
         .then(function(cityInfo) {
+                 // if user inputs a city that returns 0 results (the api is not able to pull in a city by that name; misspelled, etc), the browser will alert the user to input a valid city
+                if (cityInfo.length === 0) {
+                $('#modal-invalid').show();
+                return;
+            }
                 console.log(cityInfo)
                 var lat = cityInfo[0].lat;
                 var lon = cityInfo[0].lon;
@@ -129,7 +139,14 @@ function getCityInfo(cityName) {
                 getCurrencyCode(countryCode)
         })
 }
-
+        $('.close').on('click', function() {
+                if ($('#modal-empty:visible')) {
+                        $('#modal-empty').hide();
+                }
+                if ($('#modal-invalid:visible')) {
+                        $('#modal-invalid').hide();
+                }
+        })
 function getCurrencyCode(countryCode) {
         // api call to restcountries.com to get currency code to be used in getExchangeRate function
         var countryUrl="https://restcountries.com/v3.1/alpha/" + countryCode;

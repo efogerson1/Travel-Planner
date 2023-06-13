@@ -72,11 +72,29 @@
                         <button type="submit" class="button" id="math-submit">Submit</button>
                             <p>  will be worth XX {selected currency}</p>
                     
-                                <!-- <input type="number" class="userInput" id="userInput3"> -->
                                     
                     
                     
                     </div>
+            </div>
+        </div>
+        <!-- html for modals that pop up if there is an error with user input in the js (see if statements in api calls) -->
+        <div id="modal-empty">
+            <div class="modal-header">
+              <span class="close">&times;</span>
+              <h2>Please enter a city name</h2>
+            </div>
+            <div class="modal-body">
+              <p>Oops! It looks like you didn't enter a city name, please try again.</p>
+            </div>
+        </div>
+        <div id="modal-invalid">
+            <div class="modal-header">
+              <span class="close">&times;</span>
+              <h2>Please enter a valid city</h2>
+            </div>
+            <div class="modal-body">
+              <p>Oops! It looks like the city you entered isn't returning any results, please check your spelling and try again.</p>
             </div>
         </div>
 
