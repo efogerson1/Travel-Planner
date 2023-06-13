@@ -187,13 +187,12 @@ function getExchangeRate(currencyCode) {
 
                 // event listener to multiply the conversion rate by the user input USD amount (if user says they have 20 bucks, will return how much that is in the selected currency) 
                 // **OPTIONAL**, but I saw the input there in the html so went ahead and added this functionality
-                $('#math-submit').on('click', function(e) {
-                        e.preventDefault();
+                $('#math-submit').on('click', function() {
+                        // e.preventDefault();
                         var usdUserAmount = $('#userInput2').val();
                         var math = usdUserAmount * conversionRate;
                         console.log(math.toFixed(3));
-                        // **PRINT TO PAGE** in the 'will be worth' <p> tag can print this value that is console logged, with the 'targetCode' variable above --
-                        // ex for LONDON: {user input - $20USD} will be worth 15.902{GBP - (targetCode)} 
+                        // **PRINT TO PAGE** in the empty <span id="currency-amt"> tag (in the 'will be worth' <p> tag in html) we can print this value that is console logged, with the 'targetCode' variable above printed in the other span tag <span id="target-code">
                 })
         })
 }
