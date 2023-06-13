@@ -11,9 +11,9 @@
         <h1>Travel Planner</h1>
     </div>
 
-    <div class = "input">
+    <div class="input">
         <input type="text" class="userInput" id="userInput1">
-        <input type="submit" value="Submit" class="button">
+        <button type="button" class="button" id="submit-button">Submit</button>
     </div>
 
     <div class="display" style="border:1px solid black">
@@ -29,7 +29,7 @@
             <button  href="#">Hong Kong</button>
             <button  href="#">London</button>
             <button  href="#">New York</button>
-            <button  href="#">Syndey</button>
+            <button  href="#">Sydney</button>
     </div>
     
     
@@ -68,14 +68,33 @@
                     <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 10px; padding: 10px">
                 
                     <p class = >USD</p>
-                        <input type="text" class="userInput" id="userInput1"> 
-                            <p>  will be worth </p>
+                        <input type="text" class="userInput" id="userInput2"> 
+                        <button type="submit" class="button" id="math-submit">Submit</button>
+                            <p> &nbsp; will be worth &nbsp; <span id="currency-amt"></span> &nbsp; <span id="target-currency">{selected currency}</span></p>
                     
-                                <input type="text" class="userInput" id="userInput1">
-                                    <input type="submit" value="Submit" class="button"> 
+                                    
                     
                     
                     </div>
+            </div>
+        </div>
+        <!-- html for modals that pop up if there is an error with user input in the js (see if statements in api calls) -->
+        <div id="modal-empty">
+            <div class="modal-header">
+              <span class="close">&times;</span>
+              <h2>Please enter a city name</h2>
+            </div>
+            <div class="modal-body">
+              <p>Oops! It looks like you didn't enter a city name, please try again.</p>
+            </div>
+        </div>
+        <div id="modal-invalid">
+            <div class="modal-header">
+              <span class="close">&times;</span>
+              <h2>Please enter a valid city</h2>
+            </div>
+            <div class="modal-body">
+              <p>Oops! It looks like the city you entered isn't returning any results, please check your spelling and try again.</p>
             </div>
         </div>
 
@@ -104,7 +123,9 @@
     </div>
 
 
-
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
