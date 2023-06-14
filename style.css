@@ -1,3 +1,47 @@
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.display {
+    border: 1px solid black;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.display h1, .display h2 {
+    margin-top: 0;
+}
+
+/* Navbar styles */
+.navbar {
+    background-image: url();
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+.navbar h1 {
+    margin: 0;
+}
+
+/* City tabs styles */
+.city-tabs {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.city-tabs button {
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
 /* basic styling for modals hidden in html that pop up if errors - not final styling, just needed the modal to be able to pop up and be legible */
 #modal-empty {
     display: none; /* Hidden by default, js will trigger it to show */
@@ -36,4 +80,45 @@
 .ui-autocomplete,
 .ui-menu-item {
     background-color: white;
+}
+/* Input styles */
+.input {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.userInput {
+    padding: 5px;
+}
+.button {
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Currency exchange styles */
+.currenyExchange {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.currenyExchange h2 {
+    margin: 0;
+}
+
+/* Forecast styles */
+.forecast {
+    border: 1px solid black;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.forecast h2 {
+    margin-top: 0;
+}
+
+.forecast-day {
+    margin-top: 10px;
 }
