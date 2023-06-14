@@ -112,6 +112,17 @@ $(function () {
       });
 
 function getCityInfo(cityName) {
+        
+localStorage.setItem('cityName', cityName); // EF - Adding to beginning of function to store cityName
+ // EF - Update search history
+ var storedSearchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+ storedSearchHistory.push(cityName);
+ localStorage.setItem('searchHistory', JSON.stringify(storedSearchHistory));
+
+  // EF - Generate <li> element and append it to #searchHistory
+  var li = generateSearchHistoryLi(cityName);
+  $('#searchHistory').append(li);
+
         // uses geocode api from openweather to pull lat, lon - which will be passed into two other functions/api calls to get current weather and forecast
         var coordsUrl="https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=" + apiKey;
         fetch(coordsUrl)
@@ -182,6 +193,7 @@ function getExchangeRate(currencyCode) {
                 var targetCode = rate.target_code;
                 console.log(conversionRate);
                 console.log(targetCode);
+                localStorage.setItem('converstionRate', conversionRate); // EF - Saving retrieved conversion rate to localStorage
                 // value is how much $1(USD) is in selected currency
         // **PRINT TO PAGE** conversion rate for $1USD compared to given country currency ('rate' and 'rate.conversion_rate' specifically console logged above to print)
 
@@ -207,6 +219,8 @@ function getCurrentWeather(lat, lon) {
         .then(function (data) {
                 console.log(data);
         // **PRINT TO PAGE** city name, current date, current weather stats ('data' console logged above to view data to print)
+        localStorage.setItem('currentWeather', JSON.stringify(data)); //EF - after retrieving data, store variable in localStorage
+
         })
 }
 
@@ -219,6 +233,8 @@ function getForecast(lat, lon) {
         })
         .then(function (forecast) {
                 console.log(forecast)
+                
+                localStorage.setItem('forecast', JSON.stringify(forecast)); //EF - Adding forecast data to localStorage
         // **PRINT TO PAGE** city name, forecasted dates, forecasted weather stats ('forecast' console logged above to view data to print)
         })
 
@@ -240,6 +256,39 @@ $('.city-tabs').on('click', function(event) {
         // call getCityInfo, passing city var
         getCityInfo(cityName);
 })
+
+//EF -- retrieving stored values, printing to searchHistory
+
+function generateSearchHistoryLi(cityName) {
+        var li = $('<li>').text(cityName);
+        return li;
+      }
+      
+      $(document).ready(function() {
+      
+        // Retrieve stored search history
+        var storedSearchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+      
+        // Generate <li> elements and append them to #searchHistory
+        for (var i = 0; i < storedSearchHistory.length; i++) {
+          var cityName = storedSearchHistory[i];
+          var li = generateSearchHistoryLi(cityName);
+          $('#searchHistory').append(li);
+        }
+        
+      
+      });
+
+      // Clearing search history
+      
+  /*     var clearButton = document.getElementById("clear");
+      function clearSearchHistory(){
+        document.getElementById('searchHistory').innerHTML=""; 
+        localStorage.clear();
+    }
+
+clearButton.addEventListener("click" , clearSearchHistory); */
+
 
 // Order of operation:
 // 1. Miranda is making calls to APIs, pulling values
