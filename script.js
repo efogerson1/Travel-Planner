@@ -1,5 +1,6 @@
 var apiKey = "c97179c78467aee482929400eb659179";
-
+var currentWeather;
+var currentExchangeRate;
 // autofill widget for search bar of 100ish most populated global cities
 // drop down list will need to be styled - can add .ui-autocomplete .ui-menu-item to css to style
 $(function () {
@@ -121,6 +122,7 @@ localStorage.setItem('cityName', cityName); // EF - Adding to beginning of funct
 
   // EF - Generate <li> element and append it to #searchHistory
   var li = generateSearchHistoryLi(cityName);
+
   $('#searchHistory').append(li);
 
         // uses geocode api from openweather to pull lat, lon - which will be passed into two other functions/api calls to get current weather and forecast
@@ -137,9 +139,14 @@ localStorage.setItem('cityName', cityName); // EF - Adding to beginning of funct
         .then(function(cityInfo) {
                  // if user inputs a city that returns 0 results (the api is not able to pull in a city by that name; misspelled, etc), a modal will appear for the user explaining what went wrong and to please check their spelling
                 if (cityInfo.length === 0) {
-                $('#modal-invalid').show();
-                return;
-            }
+                   $('#modal-invalid').show();
+                   return;
+                }
+                //NSMITH - resetting variables.
+               // currentWeather= null;
+               // currentExchangeRate= null; 
+
+
                 console.log(cityInfo)
                 var lat = cityInfo[0].lat;
                 var lon = cityInfo[0].lon;
@@ -148,6 +155,9 @@ localStorage.setItem('cityName', cityName); // EF - Adding to beginning of funct
                 getCurrentWeather(lat, lon);
                 getForecast(lat, lon)
                 getCurrencyCode(countryCode)
+
+
+
         })
 }
         // hides the modals if the user clicks the close button
@@ -194,18 +204,25 @@ function getExchangeRate(currencyCode) {
                 console.log(conversionRate);
                 console.log(targetCode);
                 localStorage.setItem('converstionRate', conversionRate); // EF - Saving retrieved conversion rate to localStorage
-                // value is how much $1(USD) is in selected currency
-        // **PRINT TO PAGE** conversion rate for $1USD compared to given country currency ('rate' and 'rate.conversion_rate' specifically console logged above to print)
 
-                // event listener to multiply the conversion rate by the user input USD amount (if user says they have 20 bucks, will return how much that is in the selected currency) 
+                // value is how much $1(USD) is in selected currency
+        // **PRINT TO PAGE** conversion rate for $1USD compared to given country currency ('rate' and 'rate.conversion_rate' specifically console logged above to print
+
+                // event listener to multiply the conversion rate by the user input USD amount (if user says they have 20 bucks, will return how much
+                // that is in the selected currency) 
                 // **OPTIONAL**, but I saw the input there in the html so went ahead and added this functionality
                 $('#math-submit').on('click', function() {
                         // e.preventDefault();
                         var usdUserAmount = $('#userInput2').val();
                         var math = usdUserAmount * conversionRate;
                         console.log(math.toFixed(3));
-                        // **PRINT TO PAGE** in the empty <span id="currency-amt"> tag (in the 'will be worth' <p> tag in html) we can print this value that is console logged, with the 'targetCode' variable above printed in the other span tag <span id="target-code">
+                        // **PRINT TO PAGE** in the empty <span id="currency-amt"> tag (in the 'will be worth' <p> tag in html) we can print this value that is console logged, 
+                        // with the 'targetCode' variable above printed in the other span tag <span id="target-code">
                 })
+
+                //NICOLE: saving to global variable too
+                currentExchangeRate = rate.conversion_rate;
+                showGoodorBad(conversionRate);
         })
 }
 
@@ -218,11 +235,14 @@ function getCurrentWeather(lat, lon) {
         })
         .then(function (data) {
                 console.log(data);
-        // **PRINT TO PAGE** city name, current date, current weather stats ('data' console logged above to view data to print)
-        localStorage.setItem('currentWeather', JSON.stringify(data)); //EF - after retrieving data, store variable in localStorage
-
+        // **JASON GRANT: PRINT TO PAGE** city name, current date, current weather stats ('data' console logged above to view data to print)
+                localStorage.setItem('currentWeather', JSON.stringify(data)); //EF - after retrieving data, store variable in localStorage
+                //N.SMITH saving to global storage too. 
+                currentWeather= data; 
+                showGoodorBad();
         })
 }
+
 
 function getForecast(lat, lon) {
         // api call to get 5 day forecast for chosen city (in 3 hr increments)
@@ -279,6 +299,22 @@ function generateSearchHistoryLi(cityName) {
       
       });
 
+      //N.SMITH- UPDATING CARDS
+function showGoodorBad(conversionRate)
+{
+        if (currentWeather && currentExchangeRate){
+                if (currentWeather.main.feels_like >= 65 && currentWeather.main.feels_like <= 85 && conversionRate >=1){  //between 65 and 85 degrees, and >=1. 
+                        $("#goodCard").show();
+                        $("#badCard").hide();
+                }
+                else {
+                        $("#goodCard").hide();
+                        $("#badCard").show();
+                }
+        }
+
+};
+
       // Clearing search history
       
   /*     var clearButton = document.getElementById("clear");
@@ -290,11 +326,3 @@ function generateSearchHistoryLi(cityName) {
 clearButton.addEventListener("click" , clearSearchHistory); */
 
 
-// Order of operation:
-// 1. Miranda is making calls to APIs, pulling values
-// 2. Eric is handling call output, putting pulled information into local storage for future use
-// 3. Jason printing local storage to page, weather results & currecy comparisons
-// 4. Nicole is creating javascript logic to conditionally show cards, either all conditions are good for travel, OR one condition is not favorable, 'think about it'
-//         -Nicole will be styling HTML with CSS framework other than Bootstrap (make sure page is responsive)
-
-// Good luck everyone! Go team!
