@@ -66,8 +66,8 @@ body {
     z-index: 1; /* Stays on top of page */
     left: 25%;
     top: 10%;
-    width: 500px;
-    height: 200px;
+    width: 700px;
+    height: 400px;
     overflow: auto; /* allows scroll */
     background-color: white; 
     padding: 5px;
