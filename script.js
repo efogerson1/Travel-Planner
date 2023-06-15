@@ -339,6 +339,7 @@ function showGoodOrBad(minTempChoice, maxTempChoice) {
         if (currentWeather && currentExchangeRate){
                 if (currentWeather.main.feels_like >= minTempChoice && currentWeather.main.feels_like <= maxTempChoice && currentExchangeRate >=1){  //between user selected temps, and >=1. 
                         $("#goodCard").show();
+                        //MB - button link to expedia with city name as query parameter
                         var link = document.getElementById('travel-link');
                         link.href= "https://www.expedia.com/Hotel-Search?destination=" + currentWeather.name;
                 }
