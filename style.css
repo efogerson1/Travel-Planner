@@ -3,6 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: khaki;
 }
 
 .display {
@@ -13,11 +14,12 @@ body {
 
 .display h1, .display h2 {
     margin-top: 0;
+    color: black;
 }
 
 /* Navbar styles */
 .navbar {
-    background-image: url();
+    background-image: url(https://images.unsplash.com/photo-1502920514313-52581002a659?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dHJhdmVsJTIwbWFwfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60);
     background-color: #333;
     color: #fff;
     padding: 10px;
