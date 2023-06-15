@@ -164,6 +164,7 @@ body {
     cursor: pointer;
 }
 
+/* sets default state to hidden for travel cards */
 #goodCard {
     display: none;
 }
@@ -180,4 +181,8 @@ body {
 #set-temps {
     text-align: center;
     margin-bottom: 10px;
+}
+
+.ui-helper-hidden-accessible {
+    color: khaki;
 }

@@ -266,9 +266,10 @@ $('#submit-button').on('click', function(event) {
         // MB - call getCityInfo, passing city var
         getCityInfo(cityName);
 })
-
+// MB - event listener for presets
 $('#city-tabs').on('click', '.preset-city', function(event) {
-        event.preventDefault()
+        event.preventDefault();
+        $('#userInput1').val(''); //MB - clears input
         if ($('#goodCard:visible')) {
                 $('#goodCard:visible').hide()
         }
@@ -282,11 +283,13 @@ $('#city-tabs').on('click', '.preset-city', function(event) {
         })
 
 // MB - shows prev searches modal and allows user to click on a prev searched city to re-run the functionality
-$('#view-searches').on('click', function(event) {
+$('#view-searches').on('click', function() {
         $('#modal-prevSearched').show();
     })
     
     $('#searchHistory').on('click', '.searchHistLink', function (event) {
+        event.preventDefault();
+        $('#userInput1').val(''); //MB - clears input
     if ($('#modal-prevSearched:visible')) {
             $('#modal-prevSearched').hide();
     }
