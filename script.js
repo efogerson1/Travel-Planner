@@ -224,7 +224,7 @@ function getExchangeRate(currencyCode) {
                 })
 
                 //NICOLE: saving to global variable too
-                currentExchangeRate = rate.conversion_rate;
+                currentExchangeRate = conversionRate;
         })
 }
 
@@ -237,6 +237,7 @@ function getCurrentWeather(lat, lon) {
         })
         .then(function (data) {
                 console.log(data);
+                console.log(data.main.feels_like);
         // **JASON GRANT: PRINT TO PAGE** city name, current date, current weather stats ('data' console logged above to view data to print)
                 localStorage.setItem('currentWeather', JSON.stringify(data)); //EF - after retrieving data, store variable in localStorage
                 //N.SMITH saving to global storage too. 
@@ -264,6 +265,12 @@ function getForecast(lat, lon) {
 // event listeners to call api functions
 $('#submit-button').on('click', function(event) {
         event.preventDefault()
+        if ($('#goodCard:visible')) {
+                $('#goodCard:visible').hide()
+        }
+        if ($('#badCard:visible')) {
+                $('#badCard:visible').hide()
+        }
         // define city var based on user input
         var cityName = $('#userInput1').val();
         // call getCityInfo, passing city var
@@ -272,6 +279,12 @@ $('#submit-button').on('click', function(event) {
 
 $('#city-tabs').on('click', '.preset-city', function(event) {
         event.preventDefault()
+        if ($('#goodCard:visible')) {
+                $('#goodCard:visible').hide()
+        }
+        if ($('#badCard:visible')) {
+                $('#badCard:visible').hide()
+        }
         // define city var based on button text
         var cityName = $(event.target).text()
         // call getCityInfo, passing city var
@@ -286,9 +299,22 @@ $('#view-searches').on('click', function(event) {
     if ($('#modal-prevSearched:visible')) {
             $('#modal-prevSearched').hide();
     }
+        if ($('#goodCard:visible')) {
+                $('#goodCard:visible').hide()
+        }
+        if ($('#badCard:visible')) {
+                $('#badCard:visible').hide()
+        }
     var cityName = $(event.target).text()
     getCityInfo(cityName);
     })
+
+$('#set-temps').on('click', function(e) {
+        e.preventDefault();
+        var minTempChoice = $('#minTemp :selected').val();
+        var maxTempChoice = $('#maxTemp :selected').val();
+        showGoodorBad(minTempChoice, maxTempChoice);
+})
 
 //EF -- retrieving stored values, printing to searchHistory
 
@@ -314,15 +340,15 @@ function generateSearchHistoryLi(cityName) {
       });
 
       //N.SMITH- UPDATING CARDS
-function showGoodorBad(conversionRate)
-{
+function showGoodorBad(minTempChoice, maxTempChoice) {
+        console.log(minTempChoice);
+        console.log(maxTempChoice);
+
         if (currentWeather && currentExchangeRate){
-                if (currentWeather.main.feels_like >= 65 && currentWeather.main.feels_like <= 85 && conversionRate >=1){  //between 65 and 85 degrees, and >=1. 
+                if (currentWeather.main.feels_like >= minTempChoice && currentWeather.main.feels_like <= maxTempChoice && currentExchangeRate >=1){  //between user selected temps, and >=1. 
                         $("#goodCard").show();
-                        $("#badCard").hide();
                 }
                 else {
-                        $("#goodCard").hide();
                         $("#badCard").show();
                 }
         }
