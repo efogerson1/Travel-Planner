@@ -254,6 +254,7 @@ function getForecast(lat, lon) {
 // MB - event listeners to call api functions from submit button or one of the pre-set buttons
 $('#submit-button').on('click', function(event) {
         event.preventDefault()
+        // MB - card 'if' statements remove the current card if user re-submits a new city (otherwise both were appearing if you don't refresh page)
         if ($('#goodCard:visible')) {
                 $('#goodCard:visible').hide()
         }
