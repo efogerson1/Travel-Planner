@@ -341,7 +341,7 @@ function showGoodOrBad(minTempChoice, maxTempChoice) {
                         $("#goodCard").show();
                         //MB - button link to expedia with city name as query parameter
                         var link = document.getElementById('travel-link');
-                        link.href= "https://www.expedia.com/Hotel-Search?destination=" + currentWeather.name;
+                        link.href= "https://www.expedia.com/Hotel-Search?destination=" + currentWeather.name + ", " + currentWeather.sys.country;
                 }
                 else {
                         $("#badCard").show();
