@@ -30,18 +30,9 @@ body {
 }
 
 /* City tabs styles */
-.city-tabs {
+#city-tabs {
     text-align: center;
     margin-top: 20px;
-}
-
-.city-tabs button {
-    padding: 5px 10px;
-    margin: 5px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
 }
 
 /* basic styling for modals hidden in html that pop up if errors - not final styling, just needed the modal to be able to pop up and be legible */
@@ -66,6 +57,18 @@ body {
     width: 500px;
     height: 200px;
     background-color: rgb(202, 111, 111); 
+    padding: 5px;
+}
+#modal-prevSearched {
+    display: none; /* Hidden by default, js will trigger it to show */
+    position: fixed; /* Stays in place */
+    z-index: 1; /* Stays on top of page */
+    left: 25%;
+    top: 10%;
+    width: 500px;
+    height: 200px;
+    overflow: auto; /* allows scroll */
+    background-color: white; 
     padding: 5px;
 }
 
@@ -94,6 +97,7 @@ body {
 }
 .button {
     padding: 5px 10px;
+    margin: 3px;
     background-color: #333;
     color: #fff;
     border: none;
@@ -101,7 +105,7 @@ body {
 }
 
 /* Currency exchange styles */
-.currenyExchange {
+.currencyExchange {
     text-align: center;
     margin-top: 20px;
 }
@@ -144,4 +148,16 @@ body {
     background-color: #fff;
     padding: 20px;
     text-align: center;
+}
+
+.searchHistLink {
+    cursor: pointer;
+}
+
+#goodCard {
+    display: none;
+}
+
+#badCard {
+    display: none;
 }

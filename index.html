@@ -12,29 +12,29 @@
         <h1>Travel Planner</h1>
     </div>
 
-    <div class="previousSearch"><a href="searchHistory.html">View Search History</a></div>
+    <div class="previousSearch"><button class="button" id="view-searches">View Search History</button></div>
 
     <div class="input">
         <input type="text" class="userInput" id="userInput1">
         <button type="button" class="button" id="submit-button">Submit</button>
     </div>
 
-    <div class="display" style="border:1px solid black">
+    <!-- <div class="display" style="border:1px solid black">
         <h1 class=></h1>
         <p class = ></p>
         <p class=></p>
-    </div>
+    </div> -->
     
     <!-- City Tabs -->
-    <div class="city-tabs" >
+    <div id="city-tabs" style="border:1px solid black">
         
-            <button  href="#">Panama</button>
-            <button  href="#">Hong Kong</button>
-            <button  href="#">London</button>
-            <button  href="#">New York</button>
-            <button  href="#">Sydney</button>
+            <button class="button preset-city">Panama</button>
+            <button class="button preset-city">Hong Kong</button>
+            <button class="button preset-city">London</button>
+            <button class="button preset-city">New York</button>
+            <button class="button preset-city">Sydney</button>
     </div>
-    <div class = currencyExchange>
+    <div class ="currencyExchange">
         <div>
             <h2 class=>Currency Exchange: </h1>
                 <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 10px; padding: 10px">
@@ -99,6 +99,13 @@
             <div class="modal-body">
               <p>Oops! It looks like the city you entered isn't returning any results, please check your spelling and try again.</p>
             </div>
+        </div>
+        <div id="modal-prevSearched">
+            <h1>Search History</h1>
+            <button class="close">Go Back</button>
+            <button id="clear">Clear History</button>
+            <ol id="searchHistory"></ol>
+    
         </div>
 
     <div class = "logic-output">

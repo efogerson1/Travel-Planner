@@ -168,6 +168,9 @@ localStorage.setItem('cityName', cityName); // EF - Adding to beginning of funct
                 if ($('#modal-invalid:visible')) {
                         $('#modal-invalid').hide();
                 }
+                if ($('#modal-prevSearched:visible')) {
+                        $('#modal-prevSearched').hide();
+                }
         })
 
 function getCurrencyCode(countryCode) {
@@ -222,7 +225,6 @@ function getExchangeRate(currencyCode) {
 
                 //NICOLE: saving to global variable too
                 currentExchangeRate = rate.conversion_rate;
-                showGoodorBad(conversionRate);
         })
 }
 
@@ -239,7 +241,6 @@ function getCurrentWeather(lat, lon) {
                 localStorage.setItem('currentWeather', JSON.stringify(data)); //EF - after retrieving data, store variable in localStorage
                 //N.SMITH saving to global storage too. 
                 currentWeather= data; 
-                showGoodorBad();
         })
 }
 
@@ -269,7 +270,7 @@ $('#submit-button').on('click', function(event) {
         getCityInfo(cityName);
 })
 
-$('.city-tabs').on('click', function(event) {
+$('#city-tabs').on('click', '.preset-city', function(event) {
         event.preventDefault()
         // define city var based on button text
         var cityName = $(event.target).text()
@@ -277,10 +278,23 @@ $('.city-tabs').on('click', function(event) {
         getCityInfo(cityName);
 })
 
+$('#view-searches').on('click', function(event) {
+        $('#modal-prevSearched').show();
+    })
+    
+    $('#searchHistory').on('click', '.searchHistLink', function (event) {
+    if ($('#modal-prevSearched:visible')) {
+            $('#modal-prevSearched').hide();
+    }
+    var cityName = $(event.target).text()
+    getCityInfo(cityName);
+    })
+
 //EF -- retrieving stored values, printing to searchHistory
 
 function generateSearchHistoryLi(cityName) {
         var li = $('<li>').text(cityName);
+        li.addClass('searchHistLink');
         return li;
       }
       
@@ -317,12 +331,11 @@ function showGoodorBad(conversionRate)
 
       // Clearing search history
       
-  /*     var clearButton = document.getElementById("clear");
+   var clearButton = document.getElementById("clear");
       function clearSearchHistory(){
         document.getElementById('searchHistory').innerHTML=""; 
         localStorage.clear();
     }
-
-clearButton.addEventListener("click" , clearSearchHistory); */
+    $('#clear').on('click', clearSearchHistory);
 
 
