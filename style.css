@@ -105,13 +105,18 @@ body {
     cursor: pointer;
 }
 
+.button a {
+    color: #fff;
+    text-decoration: none;
+}
+
 /* Currency exchange styles */
 .currencyExchange {
     text-align: center;
     margin-top: 20px;
 }
 
-.currenyExchange h2 {
+.currencyExchange h2 {
     margin: 0;
 }
 

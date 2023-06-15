@@ -333,10 +333,14 @@ function generateSearchHistoryLi(cityName) {
 function showGoodOrBad(minTempChoice, maxTempChoice) {
         console.log(minTempChoice);
         console.log(maxTempChoice);
+        console.log(currentWeather);
+        console.log(currentExchangeRate);
 
         if (currentWeather && currentExchangeRate){
                 if (currentWeather.main.feels_like >= minTempChoice && currentWeather.main.feels_like <= maxTempChoice && currentExchangeRate >=1){  //between user selected temps, and >=1. 
                         $("#goodCard").show();
+                        var link = document.getElementById('travel-link');
+                        link.href= "https://www.expedia.com/Hotel-Search?destination=" + currentWeather.name;
                 }
                 else {
                         $("#badCard").show();
