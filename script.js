@@ -278,7 +278,8 @@ $('#city-tabs').on('click', '.preset-city', function(event) {
         var cityName = $(event.target).text()
         // MB - call getCityInfo, passing city var
         getCityInfo(cityName);
-})
+        })
+
 // MB - shows prev searches modal and allows user to click on a prev searched city to re-run the functionality
 $('#view-searches').on('click', function(event) {
         $('#modal-prevSearched').show();
@@ -304,6 +305,8 @@ $('#set-temps').on('click', function(e) {
         var minTempChoice = $('#minTemp :selected').val();
         var maxTempChoice = $('#maxTemp :selected').val();
         showGoodOrBad(minTempChoice, maxTempChoice);
+        var cardsDiv = document.getElementById('cards');
+        cardsDiv.scrollIntoView();
 })
 
 //EF -- retrieving stored values, printing to searchHistory
@@ -341,7 +344,7 @@ function showGoodOrBad(minTempChoice, maxTempChoice) {
                         $("#goodCard").show();
                         //MB - button link to expedia with city name as query parameter
                         var link = document.getElementById('travel-link');
-                        link.href= "https://www.expedia.com/Hotel-Search?destination=" + currentWeather.name + ", " + currentWeather.sys.country;
+                        link.href= "https://www.expedia.com/Hotel-Search?destination=" + currentWeather.name + " " + currentWeather.sys.country;
                 }
                 else {
                         $("#badCard").show();
