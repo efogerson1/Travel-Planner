@@ -34,7 +34,22 @@
             <button  href="#">New York</button>
             <button  href="#">Sydney</button>
     </div>
-    
+    <div class = currencyExchange>
+        <div>
+            <h2 class=>Currency Exchange: </h1>
+                <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 10px; padding: 10px">
+            
+                <p class = >USD</p>
+                    <input type="text" class="userInput" id="userInput2"> 
+                    <button type="submit" class="button" id="math-submit">Submit</button>
+                        <p> &nbsp; will be worth &nbsp; <span id="currency-amt"></span> &nbsp; <span id="target-currency">{selected currency}</span></p>
+                
+                                
+                
+                
+                </div>
+        </div>
+    </div>
     
     <div class="display" style="border:1px solid black">
 
@@ -65,22 +80,7 @@
         </div>
     </div>
 
-        <div class = currenyExchange>
-            <div>
-                <h2 class=>Currency Exchange: </h1>
-                    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 10px; padding: 10px">
-                
-                    <p class = >USD</p>
-                        <input type="text" class="userInput" id="userInput2"> 
-                        <button type="submit" class="button" id="math-submit">Submit</button>
-                            <p> &nbsp; will be worth &nbsp; <span id="currency-amt"></span> &nbsp; <span id="target-currency">{selected currency}</span></p>
-                    
-                                    
-                    
-                    
-                    </div>
-            </div>
-        </div>
+        
         <!-- html for modals that pop up if there is an error with user input in the js (see if statements in api calls) -->
         <div id="modal-empty">
             <div class="modal-header">

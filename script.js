@@ -143,8 +143,10 @@ localStorage.setItem('cityName', cityName); // EF - Adding to beginning of funct
                    return;
                 }
                 //NSMITH - resetting variables.
-                currentWeather= null;
-                currentExchangeRate= null; 
+               // currentWeather= null;
+               // currentExchangeRate= null; 
+
+
                 console.log(cityInfo)
                 var lat = cityInfo[0].lat;
                 var lon = cityInfo[0].lon;
@@ -220,7 +222,7 @@ function getExchangeRate(currencyCode) {
 
                 //NICOLE: saving to global variable too
                 currentExchangeRate = rate.conversion_rate;
-                showGoodorBad();
+                showGoodorBad(conversionRate);
         })
 }
 
@@ -298,11 +300,11 @@ function generateSearchHistoryLi(cityName) {
       });
 
       //N.SMITH- UPDATING CARDS
-function showGoodorBad()
+function showGoodorBad(conversionRate)
 {
         if (currentWeather && currentExchangeRate){
                 if (currentWeather.main.feels_like >= 65 && currentWeather.main.feels_like <= 85 && conversionRate >=1){  //between 65 and 85 degrees, and >=1. 
-                        $("#goodCard") .show();
+                        $("#goodCard").show();
                         $("#badCard").hide();
                 }
                 else {

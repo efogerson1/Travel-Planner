@@ -124,3 +124,24 @@ body {
 .forecast-day {
     margin-top: 10px;
 }
+/* Good card styles */
+.display.travel {
+    background-color: #c3e6cb;
+}
+
+.display.travel .card {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Bad card styles */
+.display.think-about-it {
+    background-color: #f5c6cb;
+}
+
+.display.think-about-it .card {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+}
