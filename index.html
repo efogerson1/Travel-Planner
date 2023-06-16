@@ -12,35 +12,59 @@
         <h1>Travel Planner</h1>
     </div>
 
-    <div class="previousSearch"><a href="searchHistory.html">View Search History</a></div>
+    <div class="previousSearch"><button class="button" id="view-searches">View Search History</button></div>
 
     <div class="input">
-        <input type="text" class="userInput" id="userInput1">
-        <button type="button" class="button" id="submit-button">Submit</button>
-    </div>
-
-    <div class="display" style="border:1px solid black">
-        <h1 class=></h1>
-        <p class = ></p>
-        <p class=></p>
-    </div>
+        <input type="text" class="userInput" id="userInput1" placeholder="Enter a city here"><button type="button" class="button" id="submit-button">Submit</button>
+        </div>
+       
     
     <!-- City Tabs -->
-    <div class="city-tabs" >
+    <div id="city-tabs" style="border:1px solid black">
         
-            <button  href="#">Panama</button>
-            <button  href="#">Hong Kong</button>
-            <button  href="#">London</button>
-            <button  href="#">New York</button>
-            <button  href="#">Sydney</button>
+            <button class="button preset-city">Panama</button>
+            <button class="button preset-city">Hong Kong</button>
+            <button class="button preset-city">London</button>
+            <button class="button preset-city">New York</button>
+            <button class="button preset-city">Sydney</button>
     </div>
-    <div class = currencyExchange>
+     <!-- dropdown menu for user to select their preferred min and max temps -->
+     <form action="#">
+        <div id="tempChoices">
+ 
+        <fieldset style="border:1px solid black">
+          <label for="MinTemp">Select your minimum preferred temp</label>
+          <select name="minTemp" id="minTemp">
+            <option value="30">30°F</option>
+            <option value="40">40°F</option>
+            <option value="50">50°F</option>
+            <option value="60">60°F</option>
+            <option value="70">70°F</option>
+          </select>
+          <label for="MaxTemp">Select your maximum preferred temp</label>
+          <select name="maxTemp" id="maxTemp">
+            <option value="70">70°F</option>
+            <option value="80">80°F</option>
+            <option value="90">90°F</option>
+            <option value="100">100°F</option>
+            <option value="110">110°F</option>
+          </select>
+          
+        </div>
+        </form>
+        
+    </div>
+    <div>
+        <p><b>Make sure and click the 'See Results' button at the bottom of the page!</b></p>
+    </div>
+    <div class ="currencyExchange">
         <div>
-            <h2 class=>Currency Exchange: </h1>
+            <h2 class=>Currency Exchange: </h2>
                 <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 10px; padding: 10px">
+                    <p></p>
             
                 <p class = >USD</p>
-                    <input type="text" class="userInput" id="userInput2"> 
+                    <input type="number" class="userInput" id="userInput2" placeholder="Amount of $$"> 
                     <button type="submit" class="button" id="math-submit">Submit</button>
                         <p> &nbsp; will be worth &nbsp; <span id="currency-amt"></span> &nbsp; <span id="target-currency">{selected currency}</span></p>
                 
@@ -100,16 +124,28 @@
               <p>Oops! It looks like the city you entered isn't returning any results, please check your spelling and try again.</p>
             </div>
         </div>
+        <!-- search history modal -->
+        <div id="modal-prevSearched">
+            <h1>Search History</h1>
+            <button class="close button">Go Back</button>
+            <button id="clear" class="button">Clear History</button>
+            <ol id="searchHistory"></ol>
+    
+        </div>
 
     <div class = "logic-output">
 <!-- Print end result to page -->
 <!-- currently empty, content will be printed on screen, divs will be hidden or shown using AND/OR logic -->
-        <h1>To Travel, or not to Travel, 'tis the Question!</h1>
+
+        <h2>To Travel, or not to Travel, 'tis the Question!</h2>
+        <button id="set-temps" class="button" onClick="document.getElementById('cards').scrollIntoView()">See Results!</button>
+        <div id="cards">
         <div id="goodCard" class="display travel" style="border:1px solid black">
             <div class="card">
                 <div class="container">
                   <h4><b>Travel!</b></h4>
                   <p>Vacay!</p>
+                  <button class="button"><a id="travel-link" href="" target="_blank">Time to book!</a></button>
                 </div>
             </div>
         </div>
@@ -120,8 +156,9 @@
                       <p>Bummer, dude.</p>
                     </div>
                 </div>
-        </div>         
-        </div>
+        </div>  
+        </div>      
+    </div>
     </div>
 
 

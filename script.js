@@ -1,8 +1,7 @@
 var apiKey = "c97179c78467aee482929400eb659179";
 var currentWeather;
 var currentExchangeRate;
-// autofill widget for search bar of 100ish most populated global cities
-// drop down list will need to be styled - can add .ui-autocomplete .ui-menu-item to css to style
+// MB - autofill widget for search bar of 100ish most populated global cities
 $(function () {
         var globalCities = [
                 "Tokyo",
@@ -108,7 +107,7 @@ $(function () {
                 "Montreal",
         ];
         $('#userInput1').autocomplete({
-          source: globalCities,
+          source: globalCities, //MB - pulls from the globalCities array to autofill the search input
         });
       });
 
@@ -125,11 +124,11 @@ localStorage.setItem('cityName', cityName); // EF - Adding to beginning of funct
 
   $('#searchHistory').append(li);
 
-        // uses geocode api from openweather to pull lat, lon - which will be passed into two other functions/api calls to get current weather and forecast
+        // MB - uses geocode api from openweather to pull lat, lon - which will be passed into two other functions/api calls to get current weather and forecast
         var coordsUrl="https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=" + apiKey;
         fetch(coordsUrl)
         .then(function(response) {
-                // if the input for city name is null, the geocode api call will throw an error and show a hidden modal to the user explaining what went wrong and to please enter a city name
+                // MB - error modal: if the input for city name is null, the geocode api call will throw an error and show a hidden modal to the user explaining what went wrong and to please enter a city name
                 if (response.status !== 200) {
                 $('#modal-empty').show();
                 return;
@@ -137,30 +136,23 @@ localStorage.setItem('cityName', cityName); // EF - Adding to beginning of funct
                 return response.json();
         })
         .then(function(cityInfo) {
-                 // if user inputs a city that returns 0 results (the api is not able to pull in a city by that name; misspelled, etc), a modal will appear for the user explaining what went wrong and to please check their spelling
+                 // MB - error modal: if user inputs a city that returns 0 results (the api is not able to pull in a city by that name; misspelled, etc), a modal will appear for the user explaining what went wrong and to please check their spelling
                 if (cityInfo.length === 0) {
                    $('#modal-invalid').show();
                    return;
                 }
-                //NSMITH - resetting variables.
-               // currentWeather= null;
-               // currentExchangeRate= null; 
-
 
                 console.log(cityInfo)
                 var lat = cityInfo[0].lat;
                 var lon = cityInfo[0].lon;
                 var countryCode = cityInfo[0].country;
-                // calls getCurrentWeather, getForecast, and getCurrencyCode functions; passes relevant values
+                // MB - calls getCurrentWeather, getForecast, and getCurrencyCode functions; passes relevant values
                 getCurrentWeather(lat, lon);
                 getForecast(lat, lon)
                 getCurrencyCode(countryCode)
-
-
-
         })
 }
-        // hides the modals if the user clicks the close button
+        // MB - hides the modals if the user clicks the close button
         $('.close').on('click', function() {
                 if ($('#modal-empty:visible')) {
                         $('#modal-empty').hide();
@@ -168,10 +160,13 @@ localStorage.setItem('cityName', cityName); // EF - Adding to beginning of funct
                 if ($('#modal-invalid:visible')) {
                         $('#modal-invalid').hide();
                 }
+                if ($('#modal-prevSearched:visible')) {
+                        $('#modal-prevSearched').hide();
+                }
         })
 
 function getCurrencyCode(countryCode) {
-        // api call to restcountries.com to get currency code to be used in getExchangeRate function
+        // MB - api call to restcountries.com to get currency code to be used in getExchangeRate function
         var countryUrl="https://restcountries.com/v3.1/alpha/" + countryCode;
         fetch(countryUrl)
         .then(function (response) {
@@ -184,75 +179,76 @@ function getCurrencyCode(countryCode) {
                 console.log(currencyCodeString);
                 var currencyCode = currencyCodeString.substring(2,5);
                 console.log(currencyCode);
-                // calls getExchangeRate function, passes currency code
+                // MB - calls getExchangeRate function, passes currency code
                 getExchangeRate(currencyCode);
         })
 }
 
 function getExchangeRate(currencyCode) {
+        // MB - api call to exchangerateapi.com to get exchange rate to USD
         var exchangeApiKey = "601f788cd0034538276991d8";
         var exchangeRateUrl = "https://v6.exchangerate-api.com/v6/" + exchangeApiKey + "/pair/USD/" + currencyCode;
-        // api call to exchangerateapi.com to get exchange rate to USD
         fetch(exchangeRateUrl)
         .then (function (response) {
                 return response.json()
         })
         .then (function (rate) {
-                console.log(rate);
+                console.log(rate);//MB - console logs the retrieved data to be used to display on page
                 var conversionRate = rate.conversion_rate;
                 var targetCode = rate.target_code;
+                console.log('--conversion rate--')
                 console.log(conversionRate);
+                console.log('--target code--')
                 console.log(targetCode);
                 localStorage.setItem('converstionRate', conversionRate); // EF - Saving retrieved conversion rate to localStorage
 
                 // value is how much $1(USD) is in selected currency
         // **PRINT TO PAGE** conversion rate for $1USD compared to given country currency ('rate' and 'rate.conversion_rate' specifically console logged above to print
 
-                // event listener to multiply the conversion rate by the user input USD amount (if user says they have 20 bucks, will return how much
-                // that is in the selected currency) 
-                // **OPTIONAL**, but I saw the input there in the html so went ahead and added this functionality
-                $('#math-submit').on('click', function() {
-                        // e.preventDefault();
-                        var usdUserAmount = $('#userInput2').val();
-                        var math = usdUserAmount * conversionRate;
-                        console.log(math.toFixed(3));
-                        // **PRINT TO PAGE** in the empty <span id="currency-amt"> tag (in the 'will be worth' <p> tag in html) we can print this value that is console logged, 
-                        // with the 'targetCode' variable above printed in the other span tag <span id="target-code">
-                })
+        // MB - event listener to multiply the conversion rate by the user input USD amount (if user says they have 20 bucks, will return how much that is in the selected currency) 
+        $('#math-submit').on('click', function() {
+                var usdUserAmount = $('#userInput2').val();
+                var math = usdUserAmount * conversionRate;
+                console.log(math.toFixed(3));//MB - console logs the answer to be used to display on page
+                // **PRINT TO PAGE** in the empty <span id="currency-amt"> tag (in the 'will be worth' <p> tag in html) we can print this value that is console logged, 
+                // with the 'targetCode' variable above printed in the other span tag <span id="target-code">
+        })
 
                 //NICOLE: saving to global variable too
-                currentExchangeRate = rate.conversion_rate;
-                showGoodorBad(conversionRate);
+                currentExchangeRate = conversionRate;
         })
 }
 
 function getCurrentWeather(lat, lon) {
-        // api call to get chosen city's current weather. lat & lon variables will be passed from getCityInfo
+        // MB - api call to get chosen city's current weather. lat & lon variables will be passed from getCityInfo
         var urlCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + apiKey;
         fetch(urlCurrentWeather)
         .then(function (response) {
                 return response.json();
         })
         .then(function (data) {
-                console.log(data);
+                console.log('--weather data--')
+                console.log(data);//MB - console logs the retrieved data to be used to display on page
+                console.log('--current feels like temp--')
+                console.log(data.main.feels_like);
         // **JASON GRANT: PRINT TO PAGE** city name, current date, current weather stats ('data' console logged above to view data to print)
                 localStorage.setItem('currentWeather', JSON.stringify(data)); //EF - after retrieving data, store variable in localStorage
                 //N.SMITH saving to global storage too. 
                 currentWeather= data; 
-                showGoodorBad();
         })
 }
 
 
 function getForecast(lat, lon) {
-        // api call to get 5 day forecast for chosen city (in 3 hr increments)
+        // MB - api call to get 5 day forecast for chosen city (in 3 hr increments)
         var urlForecast = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + apiKey;
         fetch(urlForecast)
         .then (function (response) {
                 return response.json();
         })
         .then(function (forecast) {
-                console.log(forecast)
+                console.log('--forecast data--')
+                console.log(forecast) //MB - console logs the retrieved data to be used to display on page
                 
                 localStorage.setItem('forecast', JSON.stringify(forecast)); //EF - Adding forecast data to localStorage
         // **PRINT TO PAGE** city name, forecasted dates, forecasted weather stats ('forecast' console logged above to view data to print)
@@ -260,27 +256,73 @@ function getForecast(lat, lon) {
 
 }
 
-// event listeners to call api functions
+// MB - event listeners to call api functions from submit button or one of the pre-set buttons
 $('#submit-button').on('click', function(event) {
         event.preventDefault()
-        // define city var based on user input
+        // MB - card 'if' statements remove the current card if user re-submits a new city (otherwise both were appearing if you don't refresh page)
+        if ($('#goodCard:visible')) {
+                $('#goodCard:visible').hide()
+        }
+        if ($('#badCard:visible')) {
+                $('#badCard:visible').hide()
+        }
+        // MB - define city var based on user input
         var cityName = $('#userInput1').val();
-        // call getCityInfo, passing city var
+        // MB - call getCityInfo, passing city var
         getCityInfo(cityName);
 })
-
-$('.city-tabs').on('click', function(event) {
-        event.preventDefault()
-        // define city var based on button text
+// MB - event listener for presets
+$('#city-tabs').on('click', '.preset-city', function(event) {
+        event.preventDefault();
+        $('#userInput1').val(''); //MB - clears input
+        if ($('#goodCard:visible')) {
+                $('#goodCard:visible').hide()
+        }
+        if ($('#badCard:visible')) {
+                $('#badCard:visible').hide()
+        }
+        // MB - define city var based on button text
         var cityName = $(event.target).text()
-        // call getCityInfo, passing city var
+        // MB - call getCityInfo, passing city var
         getCityInfo(cityName);
+        })
+
+// MB - shows prev searches modal and allows user to click on a prev searched city to re-run the functionality
+$('#view-searches').on('click', function() {
+        $('#modal-prevSearched').show();
+    })
+    
+    $('#searchHistory').on('click', '.searchHistLink', function (event) {
+        event.preventDefault();
+        $('#userInput1').val(''); //MB - clears input
+    if ($('#modal-prevSearched:visible')) {
+            $('#modal-prevSearched').hide();
+    }
+        if ($('#goodCard:visible')) {
+                $('#goodCard:visible').hide()
+        }
+        if ($('#badCard:visible')) {
+                $('#badCard:visible').hide()
+        }
+    var cityName = $(event.target).text()
+    getCityInfo(cityName);
+    })
+
+//MB - event listener to set min and max temp variable, call showGoodorBad function, and pass those values
+$('#set-temps').on('click', function(e) {
+        e.preventDefault();
+        var minTempChoice = $('#minTemp :selected').val();
+        var maxTempChoice = $('#maxTemp :selected').val();
+        showGoodOrBad(minTempChoice, maxTempChoice);
+        var cardsDiv = document.getElementById('cards');
+        cardsDiv.scrollIntoView();
 })
 
 //EF -- retrieving stored values, printing to searchHistory
 
 function generateSearchHistoryLi(cityName) {
         var li = $('<li>').text(cityName);
+        li.addClass('searchHistLink');
         return li;
       }
       
@@ -300,29 +342,33 @@ function generateSearchHistoryLi(cityName) {
       });
 
       //N.SMITH- UPDATING CARDS
-function showGoodorBad(conversionRate)
-{
+function showGoodOrBad(minTempChoice, maxTempChoice) {
+        console.log('--user min temp choice--')
+        console.log(minTempChoice);
+        console.log('--user max temp choice--')
+        console.log(maxTempChoice);
+
         if (currentWeather && currentExchangeRate){
-                if (currentWeather.main.feels_like >= 65 && currentWeather.main.feels_like <= 85 && conversionRate >=1){  //between 65 and 85 degrees, and >=1. 
+                if (currentWeather.main.feels_like >= minTempChoice && currentWeather.main.feels_like <= maxTempChoice && currentExchangeRate >=1){  //between user selected temps, and >=1. 
                         $("#goodCard").show();
-                        $("#badCard").hide();
+                        //MB - button link to expedia with city name as query parameter
+                        var link = document.getElementById('travel-link');
+                        link.href= "https://www.expedia.com/Hotel-Search?destination=" + currentWeather.name + " " + currentWeather.sys.country;
                 }
                 else {
-                        $("#goodCard").hide();
                         $("#badCard").show();
                 }
         }
 
 };
 
-      // Clearing search history
+      // EF - Clearing search history from local storage
       
-  /*     var clearButton = document.getElementById("clear");
+   var clearButton = document.getElementById("clear");
       function clearSearchHistory(){
         document.getElementById('searchHistory').innerHTML=""; 
         localStorage.clear();
     }
-
-clearButton.addEventListener("click" , clearSearchHistory); */
+    $('#clear').on('click', clearSearchHistory);
 
 

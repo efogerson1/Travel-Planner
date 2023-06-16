@@ -6,15 +6,16 @@ body {
     background-color: khaki;
 }
 
-.display {
+.display, #logic-output, .currencyExchange {
     border: 1px solid black;
     padding: 10px;
     margin-top: 20px;
 }
 
-.display h1, .display h2 {
+.display h1, .display h2, #logic-output h2, .currencyExchange h2 {
     margin-top: 0;
     color: black;
+    margin-left: 5px;
 }
 
 /* Navbar styles */
@@ -30,21 +31,12 @@ body {
 }
 
 /* City tabs styles */
-.city-tabs {
+#city-tabs {
     text-align: center;
     margin-top: 20px;
 }
 
-.city-tabs button {
-    padding: 5px 10px;
-    margin: 5px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-/* basic styling for modals hidden in html that pop up if errors - not final styling, just needed the modal to be able to pop up and be legible */
+/* MB - hidden modals to display upon certain actions in javascript file */
 #modal-empty {
     display: none; /* Hidden by default, js will trigger it to show */
     position: fixed; /* Stays in place */
@@ -68,6 +60,18 @@ body {
     background-color: rgb(202, 111, 111); 
     padding: 5px;
 }
+#modal-prevSearched {
+    display: none; /* Hidden by default, js will trigger it to show */
+    position: fixed; /* Stays in place */
+    z-index: 1; /* Stays on top of page */
+    left: 25%;
+    top: 10%;
+    width: 700px;
+    height: 400px;
+    overflow: auto; /* allows scroll */
+    background-color: white; 
+    padding: 5px;
+}
 
 .modal-header,
 .modal-body {
@@ -82,6 +86,8 @@ body {
 .ui-autocomplete,
 .ui-menu-item {
     background-color: white;
+    cursor: pointer;
+    width: 100px;
 }
 /* Input styles */
 .input {
@@ -91,22 +97,30 @@ body {
 
 .userInput {
     padding: 5px;
+    margin: 5px;
 }
 .button {
     padding: 5px 10px;
+    margin: 3px;
     background-color: #333;
     color: #fff;
     border: none;
     cursor: pointer;
 }
 
+.button a {
+    color: #fff;
+    text-decoration: none;
+}
+
 /* Currency exchange styles */
-.currenyExchange {
+.currencyExchange {
     text-align: center;
     margin-top: 20px;
 }
 
-.currenyExchange h2 {
+.currencyExchange h2 {
+    text-align: left;
     margin: 0;
 }
 
@@ -144,4 +158,31 @@ body {
     background-color: #fff;
     padding: 20px;
     text-align: center;
+}
+
+.searchHistLink {
+    cursor: pointer;
+}
+
+/* sets default state to hidden for travel cards */
+#goodCard {
+    display: none;
+}
+
+#badCard {
+    display: none;
+}
+
+#tempChoices {
+    margin: 5px;
+    text-align: center;
+}
+
+#set-temps {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.ui-helper-hidden-accessible {
+    color: khaki;
 }
