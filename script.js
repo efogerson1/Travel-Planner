@@ -196,7 +196,9 @@ function getExchangeRate(currencyCode) {
                 console.log(rate);//MB - console logs the retrieved data to be used to display on page
                 var conversionRate = rate.conversion_rate;
                 var targetCode = rate.target_code;
+                console.log('--conversion rate--')
                 console.log(conversionRate);
+                console.log('--target code--')
                 console.log(targetCode);
                 localStorage.setItem('converstionRate', conversionRate); // EF - Saving retrieved conversion rate to localStorage
 
@@ -225,7 +227,9 @@ function getCurrentWeather(lat, lon) {
                 return response.json();
         })
         .then(function (data) {
+                console.log('--weather data--')
                 console.log(data);//MB - console logs the retrieved data to be used to display on page
+                console.log('--current feels like temp--')
                 console.log(data.main.feels_like);
         // **JASON GRANT: PRINT TO PAGE** city name, current date, current weather stats ('data' console logged above to view data to print)
                 localStorage.setItem('currentWeather', JSON.stringify(data)); //EF - after retrieving data, store variable in localStorage
@@ -243,6 +247,7 @@ function getForecast(lat, lon) {
                 return response.json();
         })
         .then(function (forecast) {
+                console.log('--forecast data--')
                 console.log(forecast) //MB - console logs the retrieved data to be used to display on page
                 
                 localStorage.setItem('forecast', JSON.stringify(forecast)); //EF - Adding forecast data to localStorage
@@ -338,10 +343,10 @@ function generateSearchHistoryLi(cityName) {
 
       //N.SMITH- UPDATING CARDS
 function showGoodOrBad(minTempChoice, maxTempChoice) {
+        console.log('--user min temp choice--')
         console.log(minTempChoice);
+        console.log('--user max temp choice--')
         console.log(maxTempChoice);
-        console.log(currentWeather);
-        console.log(currentExchangeRate);
 
         if (currentWeather && currentExchangeRate){
                 if (currentWeather.main.feels_like >= minTempChoice && currentWeather.main.feels_like <= maxTempChoice && currentExchangeRate >=1){  //between user selected temps, and >=1. 
