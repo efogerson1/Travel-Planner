@@ -433,6 +433,7 @@ document.querySelector(".humidity").innerText=localStorageCurrentWeather.main.hu
 localStorageconversionRate=JSON.parse(localStorageconversionRate) 
 //console.log("currency exchange rate from local storage is:",localStorageconversionRate)
 document.getElementById("exchangeRate").innerText=localStorageconversionRate
+document.querySelector("")
 
 
 
