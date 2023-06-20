@@ -1,3 +1,5 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+
 /* Body styles */
 body {
     font-family: Arial, sans-serif;
@@ -20,7 +22,7 @@ body {
 
 /* Navbar styles */
 .navbar {
-    background-image: url(https://images.unsplash.com/photo-1502920514313-52581002a659?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dHJhdmVsJTIwbWFwfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60);
+    background-image: url(images/map-Pic.avif);
     background-color: #333;
     color: #fff;
     padding: 10px;
@@ -85,7 +87,7 @@ body {
 /* style the autofill drop down */
 .ui-autocomplete,
 .ui-menu-item {
-    background-color: white;
+    background-color: grey;
     cursor: pointer;
     width: 100px;
 }
@@ -137,6 +139,11 @@ body {
 
 .forecast-day {
     margin-top: 10px;
+}
+
+.weather-icon {
+    width: 50px;  /* Adjust the width as desired */
+    height: 50px; /* Adjust the height as desired */
 }
 /* Good card styles */
 .display.travel {
