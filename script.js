@@ -217,7 +217,7 @@ function getExchangeRate(currencyCode) {
                 // with the 'targetCode' variable above printed in the other span tag <span id="target-code">
         document.getElementById("currency-amt").innerText=math.toFixed(2)
 
-                //NICOLE: saving to global variable too
+                //NS: saving to global variable too
                 currentExchangeRate = localStorageconversionRate;
         })
 
@@ -391,25 +391,45 @@ var fiveDayForecast3HrInt=localStorageForecast.list
 //we want to loop through the entire array
 for(i=0;i<fiveDayForecast3HrInt.length;i+=7){
         //now we are inside the for loop and need to get the date of a single forecast
-        var dateWithHour=fiveDayForecast3HrInt[i].dt_txt
-        var date=dateWithHour.split(" ")
-        var tempValue=fiveDayForecast3HrInt[i].main.temp
+        var dateWithHour=fiveDayForecast3HrInt[i].dt_txt;
+        var date=dateWithHour.split(" ");
+        var tempValue=fiveDayForecast3HrInt[i].main.temp;
         //we split it by the space and i only want the first one
-        date=date[0]
+        date=date[0];
         //console.log(tempValue)
         //now we want to print to the page so lets make an element to hold it
-       var title= $("<p>")
-       var tempElement =$("<p>")
+       var title= $("<p>");
+       var tempElement =$("<p>");
+
        //now lets set the newly created elements text to the date
-       title.text(date)
-       tempElement.text(tempValue)
+       title.text(date + " : ");
+       tempElement.text(tempValue + " °F");
        //now lets append the element containing the date to the proper part of the page
         
        //you need to get the forecast put it in some element and append it 
-       var forecastElement=$("#"+i)
-       forecastElement.append(title).append(tempElement)
-       
+       var forecastElement=$("#"+i);
+       forecastElement.append(title).append(tempElement); 
+
+
+       var weatherArt= "<img src='" + getWeatherIcon (tempValue)+ "'>" 
+ forecastElement.children(".weather-icon").html(weatherArt)//NS 
+
 }
+//NS adding parameters for temp icons
+function getWeatherIcon(tempValue) {
+        if (tempValue < 30)
+            return "images/snowflake.png"; // SNOWFLAKE
+        else if (tempValue >= 30 && tempValue < 65)
+            return "images/cloud.webp"; // CLOUD
+        else if (tempValue >= 65 && tempValue < 90)
+            return "images/sun.png"; // SUN
+        else if (tempValue >= 90)
+            return "images/fire.jpg"; // FIRE
+    }
+
+
+//END 
+
 $("#jason").append()
 //******FIVEDAY FORECAST END******
 //******SEARCH HISTORY START******
