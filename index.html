@@ -58,51 +58,50 @@
         <p><b>Make sure and click the 'See Results' button at the bottom of the page!</b></p>
     </div>
     <div class ="currencyExchange">
-        <div>
-            <h2 class=>Currency Exchange: </h2>
-                <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 10px; padding: 10px">
-                    <p></p>
-            
-                <p class = >USD</p>
+        
+            <h2>Currency Exchange: </h2>
+                <div>
+                    <p id="currency-exchange"></p>
+        
                     <input type="number" class="userInput" id="userInput2" placeholder="Amount of $$"> 
                     <button type="submit" class="button" id="math-submit">Submit</button>
-                        <p> &nbsp; will be worth &nbsp; <span id="currency-amt"></span> &nbsp; <span id="target-currency">{selected currency}</span></p>
+                        <p> &nbsp; will be worth &nbsp; <span id="currency-amt"></span> &nbsp; <span id="target-currency"></span></p>
                 
                                 
                 
                 
-                </div>
+                
         </div>
     </div>
     
     <div class="display" style="border:1px solid black">
 
-        <h2>Current Weather</h2>
-        <p class = "name"></p>
-        <p class = "temp" >Temperature: XX°C</p>
-        <p class = "wind">Wind: XX km/h</p>
-        <p class = "humidity">Humidity: XX%</p>
+        <h2 id="current-weather-header">Current Weather <span class="weather-icon"></span></h2>
+        <p id = "name"></p>
+        <p id = "temp"></p>
+        <p id = "wind"></p>
+        <p id = "humidity"></p>
     </div>
     
     <!-- 5 Day Forecast Section -->
-    <div class="forecast" style="border:1px solid black">
+    <!-- <div class="forecast" style="border:1px solid black">
         <h2>5 Day Forecast</h2>
-        <div class="forecast-day">
+        <div class="forecast-day"> -->
             <!-- Day 1 forecast details -->
-        </div>
-        <div class="forecast-day">
+        <!-- </div>
+        <div class="forecast-day"> -->
             <!-- Day 2 forecast details -->
-        </div>
-        <div class="forecast-day">
+        <!-- </div>
+        <div class="forecast-day"> -->
             <!-- Day 3 forecast details -->
-        </div>
-        <div class="forecast-day">
+        <!-- </div>
+        <div class="forecast-day"> -->
             <!-- Day 4 forecast details -->
-        </div>
-        <div class="forecast-day">
+        <!-- </div>
+        <div class="forecast-day"> -->
             <!-- Day 5 forecast details -->
-        </div>
-    </div>
+        <!-- </div>
+    </div> -->
 
         
         <!-- html for modals that pop up if there is an error with user input in the js (see if statements in api calls) -->
