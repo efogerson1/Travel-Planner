@@ -91,7 +91,7 @@ body {
 }
 /* Input styles */
 .input {
-    text-align: center;
+    /* text-align: center; */
     margin-top: 20px;
 }
 
@@ -115,12 +115,10 @@ body {
 
 /* Currency exchange styles */
 .currencyExchange {
-    text-align: center;
     margin-top: 20px;
 }
 
 .currencyExchange h2 {
-    text-align: left;
     margin: 0;
 }
 

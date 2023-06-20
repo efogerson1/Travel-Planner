@@ -146,9 +146,9 @@ localStorage.setItem('cityName', cityName); // EF - Adding to beginning of funct
                 var lat = cityInfo[0].lat;
                 var lon = cityInfo[0].lon;
                 var countryCode = cityInfo[0].country;
-                // MB - calls getCurrentWeather, getForecast, and getCurrencyCode functions; passes relevant values
+                // MB - calls getCurrentWeather, getForecast (for later development), and getCurrencyCode functions; passes relevant values
                 getCurrentWeather(lat, lon);
-                getForecast(lat, lon)
+                // getForecast(lat, lon)
                 getCurrencyCode(countryCode)
         })
 }
@@ -203,15 +203,16 @@ function getExchangeRate(currencyCode) {
                 localStorage.setItem('converstionRate', conversionRate); // EF - Saving retrieved conversion rate to localStorage
 
                 // value is how much $1(USD) is in selected currency
-        // **PRINT TO PAGE** conversion rate for $1USD compared to given country currency ('rate' and 'rate.conversion_rate' specifically console logged above to print
-
+                // MB/EF - displays currency rate to the page
+                $('#currency-exchange').text('Conversion Rate: ' + conversionRate);
         // MB - event listener to multiply the conversion rate by the user input USD amount (if user says they have 20 bucks, will return how much that is in the selected currency) 
         $('#math-submit').on('click', function() {
                 var usdUserAmount = $('#userInput2').val();
                 var math = usdUserAmount * conversionRate;
                 console.log(math.toFixed(3));//MB - console logs the answer to be used to display on page
-                // **PRINT TO PAGE** in the empty <span id="currency-amt"> tag (in the 'will be worth' <p> tag in html) we can print this value that is console logged, 
-                // with the 'targetCode' variable above printed in the other span tag <span id="target-code">
+                // MB/EF - displays math values to the page
+                $('#currency-amt').text(math.toFixed(3));
+                $('#target-currency').text(targetCode);
         })
 
                 //NICOLE: saving to global variable too
@@ -231,30 +232,34 @@ function getCurrentWeather(lat, lon) {
                 console.log(data);//MB - console logs the retrieved data to be used to display on page
                 console.log('--current feels like temp--')
                 console.log(data.main.feels_like);
-        // **JASON GRANT: PRINT TO PAGE** city name, current date, current weather stats ('data' console logged above to view data to print)
+        // **MB/EF: displays city name, current date, current weather stats to page
+                $('#name').text('City: ' +data.name);
+                $('#temp').text('Temp (Feels like): ' +data.main.feels_like + '°F');
+                $('#wind').text('Wind Speed: ' +data.wind.speed + ' MPH');
+                $('#humidity').text('Humidity: ' +data.main.humidity + '%');
                 localStorage.setItem('currentWeather', JSON.stringify(data)); //EF - after retrieving data, store variable in localStorage
                 //N.SMITH saving to global storage too. 
                 currentWeather= data; 
         })
 }
 
-
-function getForecast(lat, lon) {
-        // MB - api call to get 5 day forecast for chosen city (in 3 hr increments)
-        var urlForecast = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + apiKey;
-        fetch(urlForecast)
-        .then (function (response) {
-                return response.json();
-        })
-        .then(function (forecast) {
-                console.log('--forecast data--')
-                console.log(forecast) //MB - console logs the retrieved data to be used to display on page
+// commented out for now, can add in in later development
+// function getForecast(lat, lon) {
+//         // MB - api call to get 5 day forecast for chosen city (in 3 hr increments)
+//         var urlForecast = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + apiKey;
+//         fetch(urlForecast)
+//         .then (function (response) {
+//                 return response.json();
+//         })
+//         .then(function (forecast) {
+//                 console.log('--forecast data--')
+//                 console.log(forecast) //MB - console logs the retrieved data to be used to display on page
                 
-                localStorage.setItem('forecast', JSON.stringify(forecast)); //EF - Adding forecast data to localStorage
-        // **PRINT TO PAGE** city name, forecasted dates, forecasted weather stats ('forecast' console logged above to view data to print)
-        })
+//                 localStorage.setItem('forecast', JSON.stringify(forecast)); //EF - Adding forecast data to localStorage
+//         // **PRINT TO PAGE** city name, forecasted dates, forecasted weather stats ('forecast' console logged above to view data to print)
+//         })
 
-}
+// }
 
 // MB - event listeners to call api functions from submit button or one of the pre-set buttons
 $('#submit-button').on('click', function(event) {
@@ -311,6 +316,12 @@ $('#view-searches').on('click', function() {
 //MB - event listener to set min and max temp variable, call showGoodorBad function, and pass those values
 $('#set-temps').on('click', function(e) {
         e.preventDefault();
+        if ($('#goodCard:visible')) {
+                $('#goodCard:visible').hide()
+        }
+        if ($('#badCard:visible')) {
+                $('#badCard:visible').hide()
+        }
         var minTempChoice = $('#minTemp :selected').val();
         var maxTempChoice = $('#maxTemp :selected').val();
         showGoodOrBad(minTempChoice, maxTempChoice);
