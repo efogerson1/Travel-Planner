@@ -1,9 +1,6 @@
 var apiKey = "c97179c78467aee482929400eb659179";
 var currentWeather;
 var currentExchangeRate;
-var localStorageCurrentWeather=localStorage.getItem("currentWeather")
-var localStorageconversionRate=localStorage.getItem("conversionRate")
-var localStorageForecast=localStorage.getItem("forecast")
 // MB - autofill widget for search bar of 100ish most populated global cities
 $(function () {
         var globalCities = [
@@ -203,24 +200,24 @@ function getExchangeRate(currencyCode) {
                 console.log(conversionRate);
                 console.log('--target code--')
                 console.log(targetCode);
-                localStorage.setItem('conversionRate', conversionRate); // EF - Saving retrieved conversion rate to localStorage
+                localStorage.setItem('converstionRate', conversionRate); // EF - Saving retrieved conversion rate to localStorage
 
                 // value is how much $1(USD) is in selected currency
         // **PRINT TO PAGE** conversion rate for $1USD compared to given country currency ('rate' and 'rate.conversion_rate' specifically console logged above to print
-})}     // JG moved these braces and parens around due to button click being inside the exchange rate function, the button did not work. Tutor helped with this! I was lost!
+
         // MB - event listener to multiply the conversion rate by the user input USD amount (if user says they have 20 bucks, will return how much that is in the selected currency) 
         $('#math-submit').on('click', function() {
                 var usdUserAmount = $('#userInput2').val();
-                var math = usdUserAmount * localStorageconversionRate;
+                var math = usdUserAmount * conversionRate;
                 console.log(math.toFixed(3));//MB - console logs the answer to be used to display on page
                 // **PRINT TO PAGE** in the empty <span id="currency-amt"> tag (in the 'will be worth' <p> tag in html) we can print this value that is console logged, 
                 // with the 'targetCode' variable above printed in the other span tag <span id="target-code">
-        document.getElementById("currency-amt").innerText=math.toFixed(2)
-
-                //NICOLE: saving to global variable too
-                currentExchangeRate = localStorageconversionRate;
         })
 
+                //NICOLE: saving to global variable too
+                currentExchangeRate = conversionRate;
+        })
+}
 
 function getCurrentWeather(lat, lon) {
         // MB - api call to get chosen city's current weather. lat & lon variables will be passed from getCityInfo
@@ -238,7 +235,7 @@ function getCurrentWeather(lat, lon) {
                 localStorage.setItem('currentWeather', JSON.stringify(data)); //EF - after retrieving data, store variable in localStorage
                 //N.SMITH saving to global storage too. 
                 currentWeather= data; 
-        })// JG changed some stuff here with these braces and parens.
+        })
 }
 
 
@@ -375,70 +372,3 @@ function showGoodOrBad(minTempChoice, maxTempChoice) {
     $('#clear').on('click', clearSearchHistory);
 
 
-//jasons testing area
-
-//******FIVE DAY FORECAST START******
-//how to get something from local storage and turn it into an object so its usable
-
-localStorageForecast=JSON.parse(localStorageForecast)
-//console.log("forecast from local storage is:",localStorageForecast)
-
-//how would i write it to the page??
-var cityName=localStorageForecast.city.name
-//lets just pull out the hourly breakdown for the next five days
-var fiveDayForecast3HrInt=localStorageForecast.list
-//since the forcast shows every three hours we need a for loop that gets every seventh item
-//we want to loop through the entire array
-for(i=0;i<fiveDayForecast3HrInt.length;i+=7){
-        //now we are inside the for loop and need to get the date of a single forecast
-        var dateWithHour=fiveDayForecast3HrInt[i].dt_txt
-        var date=dateWithHour.split(" ")
-        var tempValue=fiveDayForecast3HrInt[i].main.temp
-        //we split it by the space and i only want the first one
-        date=date[0]
-        //console.log(tempValue)
-        //now we want to print to the page so lets make an element to hold it
-       var title= $("<p>")
-       var tempElement =$("<p>")
-       //now lets set the newly created elements text to the date
-       title.text(date)
-       tempElement.text(tempValue)
-       //now lets append the element containing the date to the proper part of the page
-        
-       //you need to get the forecast put it in some element and append it 
-       var forecastElement=$("#"+i)
-       forecastElement.append(title).append(tempElement)
-       
-}
-$("#jason").append()
-//******FIVEDAY FORECAST END******
-//******SEARCH HISTORY START******
-
-//var localStorageSearchHistory=localStorage.getItem("searchHistory")
-//localStorageSearchHistory=JSON.parse(localStorageSearchHistory)
-//console.log("search history", localStorageSearchHistory)
-
-//******SEARCH HISTORY END ******
-//******Current Weather Start******
-
-localStorageCurrentWeather=JSON.parse(localStorageCurrentWeather) 
-//console.log("current weather from local storage is:",localStorageCurrentWeather)
-document.querySelector(".cityname").innerText=localStorageCurrentWeather.name
-document.querySelector(".temp").innerText=localStorageCurrentWeather.main.temp
-document.querySelector(".wind").innerText=localStorageCurrentWeather.wind.speed
-document.querySelector(".humidity").innerText=localStorageCurrentWeather.main.humidity  
-//******Current Weather Ends******
-//******Currency exchange section begins******
-
-localStorageconversionRate=JSON.parse(localStorageconversionRate) 
-//console.log("currency exchange rate from local storage is:",localStorageconversionRate)
-document.getElementById("exchangeRate").innerText=localStorageconversionRate
-document.querySelector("")
-
-
-
-
-
-//******Currency Exchange Section ends******
-
-//end jasons testing area
