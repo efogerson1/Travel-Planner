@@ -4,36 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Planner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> <!-- EF, added Bulma styling -->
     <link rel="stylesheet" href="style.css">
-    
 </head>
 <body>
+    <div class = "content">
     <div class="navbar">
-        <h1>Travel Planner</h1>
+        <h1 style="color: white" >Travel Planner</h1>
     </div>
 
-    <div class="previousSearch"><button class="button" id="view-searches">View Search History</button></div>
+    <div class="previousSearch"><button class="button is-primary" id="view-searches">View Search History</button></div>
 
-    <div class="input">
-        <input type="text" class="userInput" id="userInput1" placeholder="Enter a city here"><button type="button" class="button" id="submit-button">Submit</button>
+    <div class="input" id="cityInput" style = "background-color: transparent; border: none;">
+        <input type="text" class="userInput" id="userInput1" placeholder="Enter a city here"><button type="button" class="button is-dark" id="submit-button">Submit</button>
         </div>
        
     
     <!-- City Tabs -->
-    <div id="city-tabs" style="border:1px solid black">
+    <div id="city-tabs" class = "cityButtons">
         
-            <button class="button preset-city">Panama</button>
-            <button class="button preset-city">Hong Kong</button>
-            <button class="button preset-city">London</button>
-            <button class="button preset-city">New York</button>
-            <button class="button preset-city">Sydney</button>
+            <button class="button preset-city is-info">Panama</button>
+            <button class="button preset-city is-info">Hong Kong</button>
+            <button class="button preset-city is-info">London</button>
+            <button class="button preset-city is-info">New York</button>
+            <button class="button preset-city is-info">Sydney</button>
     </div>
      <!-- dropdown menu for user to select their preferred min and max temps -->
      <form action="#">
         <div id="tempChoices">
  
         <fieldset style="border:1px solid black">
-          <label for="MinTemp">Select your minimum preferred temp</label>
+          <label for="MinTemp" style="color: black" >Select your minimum preferred temp</label>
           <select name="minTemp" id="minTemp">
             <option value="30">30°F</option>
             <option value="40">40°F</option>
@@ -41,7 +42,7 @@
             <option value="60">60°F</option>
             <option value="70">70°F</option>
           </select>
-          <label for="MaxTemp">Select your maximum preferred temp</label>
+          <label for="MaxTemp" style="color: black">Select your maximum preferred temp</label>
           <select name="maxTemp" id="maxTemp">
             <option value="70">70°F</option>
             <option value="80">80°F</option>
@@ -54,17 +55,17 @@
         </form>
         
     </div>
-    <div>
-        <p><b>Make sure and click the 'See Results' button at the bottom of the page!</b></p>
+    <div class = "instructions">
+        <p style="color: black"><b>Make sure to click the 'See Results' button at the bottom of the page!</b></p>
     </div>
-    <div class ="currencyExchange">
+    <div class ="currencyExchange" style="color: black">
         
             <h2>Currency Exchange: </h2>
                 <div>
                     <p id="currency-exchange"></p>
         
                     <input type="number" class="userInput" id="userInput2" placeholder="Amount of $$"> 
-                    <button type="submit" class="button" id="math-submit">Submit</button>
+                    <button type="submit" class="button is-dark" id="math-submit">Submit</button>
                         <p> &nbsp; will be worth &nbsp; <span id="currency-amt"></span> &nbsp; <span id="target-currency"></span></p>
                 
                                 
@@ -74,7 +75,7 @@
         </div>
     </div>
     
-    <div class="display" style="border:1px solid black">
+    <div class="display" style="border-top:2px dotted black">
 
         <h2 id="current-weather-header">Current Weather <span class="weather-icon"></span></h2>
         <p id = "name"></p>
@@ -136,8 +137,8 @@
 <!-- Print end result to page -->
 <!-- currently empty, content will be printed on screen, divs will be hidden or shown using AND/OR logic -->
 
-        <h2>To Travel, or not to Travel, 'tis the Question!</h2>
-        <button id="set-temps" class="button" onClick="document.getElementById('cards').scrollIntoView()">See Results!</button>
+        <h2 style="color: black">To Travel, or not to Travel, 'tis the Question!</h2>
+        <button id="set-temps" class="button is-success" onClick="document.getElementById('cards').scrollIntoView()">See Results!</button>
         <div id="cards">
         <div id="goodCard" class="display travel" style="border:1px solid black">
             <div class="card">
@@ -159,7 +160,7 @@
         </div>      
     </div>
     </div>
-
+</div>
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
