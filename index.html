@@ -58,32 +58,30 @@
     <div class = "instructions">
         <p>Make sure to click the 'See Results' button at the bottom of the page!</p>
     </div>
-    <div class ="currencyExchange">
-        
-            <h2>Currency Exchange: </h2>
-            <p id="currency-exchange" style="color: black;"></p>
+    <div class="columns">
+        <div class ="column currencyExchange">
 
-                <div id="currency-exchange-calc">
-                <input type="number" class="userInput" id="userInput2" placeholder="Amount of $$"> 
-                <button type="submit" class="button is-dark" id="math-submit">Convert</button>
-                    <p style="color: black;">will be worth &nbsp;<span id="currency-amt"></span> &nbsp;<span id="target-currency"></span></p>
-                </div>
-                
-                                
-                
-                
+                <h2>Currency Exchange: </h2>
+                <p id="currency-exchange" style="color: black;"></p>
+
+                    <div id="currency-exchange-calc">
+                    <input type="number" class="userInput" id="userInput2" placeholder="Amount of $$"> 
+                    <button type="submit" class="button is-dark" id="math-submit">Convert</button>
+                        <p style="color: black;">will be worth &nbsp;<span id="currency-amt"></span> &nbsp;<span id="target-currency"></span></p>
+                    </div>
                 
         </div>
-    </div>
     
-    <div class="display" style="border-top:2px dotted black">
-
-        <h2>Current Weather:</h2>
-        <div id="weather-output">
-            <p id = "name"></p>
-            <p id = "temp"></p>
-            <p id = "wind"></p>
-            <p id = "humidity"></p>
+    
+        <div class="display column">
+        
+            <h2>Current Weather:</h2>
+            <div id="weather-output">
+                <p id = "name"></p>
+                <p id = "temp"></p>
+                <p id = "wind"></p>
+                <p id = "humidity"></p>
+            </div>
         </div>
     </div>
     
