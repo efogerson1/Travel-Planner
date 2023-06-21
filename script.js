@@ -204,7 +204,7 @@ function getExchangeRate(currencyCode) {
 
                 // value is how much $1(USD) is in selected currency
                 // MB/EF - displays currency rate to the page
-                $('#currency-exchange').text('Conversion Rate: ' + conversionRate);
+                $('#currency-exchange').text('Conversion Rate: ' + conversionRate + ' (1 USD to ' + targetCode +')');
         // MB - event listener to multiply the conversion rate by the user input USD amount (if user says they have 20 bucks, will return how much that is in the selected currency) 
         $('#math-submit').on('click', function() {
                 var usdUserAmount = $('#userInput2').val();

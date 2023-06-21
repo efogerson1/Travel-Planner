@@ -17,15 +17,13 @@ body {
     flex-basis: 50%;
 }
 
-.display, #logic-output, .currencyExchange {
-    /* border: 1px solid black; */
-    padding: 20px;
+.display, .logic-output, .currencyExchange {
+    padding: 2em;
     margin-top: 20px;
 }
 
-.display h1, .display h2, #logic-output h2, .currencyExchange h2 {
-    margin-top: 0;
-    margin-left: 5px;
+.display h1, .display h2, .logic-output h2, .currencyExchange h2 {
+    font-size: 150%;
     padding: 2em;
     color: black;
 }
@@ -37,17 +35,22 @@ body {
     text-align: center;
 }
 
-.instructions{
-    text-align: center;
+.navbar h1 {
+    color: white;
+    text-shadow: 2px 2px 2px rgb(0, 209, 178, 0.5);
 }
 
-.tempChoices{
+.instructions{
+    text-align: center;
+    color: black;
+}
+
+#tempChoices{
     font-weight: bold;
 }
 
 /* City tabs styles */
 #city-tabs {
-    text-align: center;
     margin-top: 20px;
 }
 
@@ -66,7 +69,9 @@ p {
     width: 500px;
     height: 200px;
     background-color: rgb(202, 111, 111); 
-    padding: 5px;
+    padding: 10px;
+    border: 2px black solid;
+    border-radius: 20px;
 }
 
 #modal-invalid {
@@ -78,7 +83,9 @@ p {
     width: 500px;
     height: 200px;
     background-color: rgb(202, 111, 111); 
-    padding: 5px;
+    padding: 10px;
+    border: 2px black solid;
+    border-radius: 20px;
 }
 #modal-prevSearched {
     display: none; /* Hidden by default, js will trigger it to show */
@@ -90,7 +97,9 @@ p {
     height: 400px;
     overflow: auto; /* allows scroll */
     background-color: white; 
-    padding: 5px;
+    padding: 10px;
+    border: 2px black solid;
+    border-radius: 20px;
 }
 
 .modal-header,
@@ -116,14 +125,12 @@ p {
 
 .userInput {
     padding: 5px;
-    margin: 5px;
+    margin: 5px 5px 5px 0px;
     
 }
 
 #cityInput{
-    width: 25%;
-    justify-content: center;
-    left: 45em;
+    width: 100%;
 }
 
 .button {
@@ -134,21 +141,25 @@ p {
 }
 
 .button a {
-    
     text-decoration: none;
+    color: white;
 }
 
 /* Currency exchange styles */
 .currencyExchange {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
-.currencyExchange h2 {
-    margin: 0;
+#currency-exchange {
+    padding-left: 3em;
 }
 
-/* Forecast styles */
-.forecast {
+#currency-exchange-calc {
+    padding-left: 3em;
+}
+
+/* Forecast styles (for future dev) */
+/* .forecast {
     border: 1px solid black;
     padding: 10px;
     margin-top: 20px;
@@ -160,7 +171,9 @@ p {
 
 .forecast-day {
     margin-top: 10px;
-}
+} */
+
+
 /* Good card styles */
 .display.travel {
     background-color: #c3e6cb;
@@ -199,13 +212,23 @@ p {
 #tempChoices {
     margin: 5px;
     text-align: center;
+    border-top: 2px dotted black;
+    border-bottom: 2px dotted black;
+}
+
+#temp-choices {
+    padding: 1em;
 }
 
 #set-temps {
-    text-align: center;
+    margin-left: 3em;
     margin-bottom: 10px;
 }
 
+#weather-output {
+    padding-left: 3em;
+}
+
 .ui-helper-hidden-accessible {
-    color: khaki;
+    color: #f9B612;
 }
