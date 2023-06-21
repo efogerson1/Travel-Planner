@@ -10,18 +10,18 @@
 <body>
     <div class = "content">
     <div class="navbar">
-        <h1 style="color: white" >Travel Planner</h1>
+        <h1>Travel Planner</h1>
     </div>
 
     <div class="previousSearch"><button class="button is-primary" id="view-searches">View Search History</button></div>
 
-    <div class="input" id="cityInput" style = "background-color: transparent; border: none;">
+    <div class="input is-flex is-flex-wrap-wrap is-justify-content-center" id="cityInput" style = "background-color: transparent; border: none;">
         <input type="text" class="userInput" id="userInput1" placeholder="Enter a city here"><button type="button" class="button is-dark" id="submit-button">Submit</button>
         </div>
        
     
     <!-- City Tabs -->
-    <div id="city-tabs" class = "cityButtons">
+    <div id="city-tabs" class = "cityButtons is-flex is-flex-wrap-wrap is-justify-content-center">
         
             <button class="button preset-city is-info">Panama</button>
             <button class="button preset-city is-info">Hong Kong</button>
@@ -29,11 +29,11 @@
             <button class="button preset-city is-info">New York</button>
             <button class="button preset-city is-info">Sydney</button>
     </div>
-     <!-- dropdown menu for user to select their preferred min and max temps -->
+     <!-- MB - dropdown menu for user to select their preferred min and max temps -->
      <form action="#">
         <div id="tempChoices">
  
-        <fieldset style="border:1px solid black">
+        <fieldset id="temp-choices">
           <label for="MinTemp" style="color: black" >Select your minimum preferred temp</label>
           <select name="minTemp" id="minTemp">
             <option value="30">30°F</option>
@@ -56,17 +56,18 @@
         
     </div>
     <div class = "instructions">
-        <p style="color: black"><b>Make sure to click the 'See Results' button at the bottom of the page!</b></p>
+        <p>Make sure to click the 'See Results' button at the bottom of the page!</p>
     </div>
-    <div class ="currencyExchange" style="color: black">
+    <div class ="currencyExchange">
         
             <h2>Currency Exchange: </h2>
-                <div>
-                    <p id="currency-exchange"></p>
-        
-                    <input type="number" class="userInput" id="userInput2" placeholder="Amount of $$"> 
-                    <button type="submit" class="button is-dark" id="math-submit">Submit</button>
-                        <p> &nbsp; will be worth &nbsp; <span id="currency-amt"></span> &nbsp; <span id="target-currency"></span></p>
+            <p id="currency-exchange" style="color: black;"></p>
+
+                <div id="currency-exchange-calc">
+                <input type="number" class="userInput" id="userInput2" placeholder="Amount of $$"> 
+                <button type="submit" class="button is-dark" id="math-submit">Convert</button>
+                    <p style="color: black;">will be worth &nbsp;<span id="currency-amt"></span> &nbsp;<span id="target-currency"></span></p>
+                </div>
                 
                                 
                 
@@ -77,14 +78,16 @@
     
     <div class="display" style="border-top:2px dotted black">
 
-        <h2 id="current-weather-header">Current Weather <span class="weather-icon"></span></h2>
-        <p id = "name"></p>
-        <p id = "temp"></p>
-        <p id = "wind"></p>
-        <p id = "humidity"></p>
+        <h2>Current Weather:</h2>
+        <div id="weather-output">
+            <p id = "name"></p>
+            <p id = "temp"></p>
+            <p id = "wind"></p>
+            <p id = "humidity"></p>
+        </div>
     </div>
     
-    <!-- 5 Day Forecast Section -->
+    <!-- 5 Day Forecast Section (for future development) -->
     <!-- <div class="forecast" style="border:1px solid black">
         <h2>5 Day Forecast</h2>
         <div class="forecast-day"> -->
@@ -105,7 +108,7 @@
     </div> -->
 
         
-        <!-- html for modals that pop up if there is an error with user input in the js (see if statements in api calls) -->
+        <!-- MB - html for modals that pop up if there is an error with user input in the js (see if statements in api calls) -->
         <div id="modal-empty">
             <div class="modal-header">
               <span class="close">&times;</span>
@@ -124,28 +127,28 @@
               <p>Oops! It looks like the city you entered isn't returning any results, please check your spelling and try again.</p>
             </div>
         </div>
-        <!-- search history modal -->
+        <!-- EF - search history modal -->
         <div id="modal-prevSearched">
             <h1>Search History</h1>
-            <button class="close button">Go Back</button>
-            <button id="clear" class="button">Clear History</button>
+            <button class="close button is-info">Go Back</button>
+            <button id="clear" class="button is-info">Clear History</button>
             <ol id="searchHistory"></ol>
     
         </div>
 
-    <div class = "logic-output">
+    <div class = "logic-output" style="border-top:2px dotted black">
 <!-- Print end result to page -->
 <!-- currently empty, content will be printed on screen, divs will be hidden or shown using AND/OR logic -->
 
-        <h2 style="color: black">To Travel, or not to Travel, 'tis the Question!</h2>
-        <button id="set-temps" class="button is-success" onClick="document.getElementById('cards').scrollIntoView()">See Results!</button>
+        <h2>To Travel, or not to Travel, 'tis the Question!</h2>
+        <button id="set-temps" class="button is-success">See Results!</button>
         <div id="cards">
         <div id="goodCard" class="display travel" style="border:1px solid black">
             <div class="card">
                 <div class="container">
                   <h4><b>Travel!</b></h4>
                   <p>Vacay!</p>
-                  <button class="button"><a id="travel-link" href="" target="_blank">Time to book!</a></button>
+                  <button class="button is-info"><a id="travel-link" href="" target="_blank">Time to book!</a></button>
                 </div>
             </div>
         </div>
